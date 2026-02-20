@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tri Matic</title>
+    <meta name="description"
+        content="Tri Matic is a creative digital studio crafting immersive, interaction-driven websites and digital experiences.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Oswald:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="cursor"></div>
+    <!-- Target Cursor Brackets -->
+    <div class="cursor-brackets" id="cursorBrackets" aria-hidden="true">
+        <span class="cb cb-tl"></span>
+        <span class="cb cb-tr"></span>
+        <span class="cb cb-bl"></span>
+        <span class="cb cb-br"></span>
+    </div>
+    <div class="fx-silk" aria-hidden="true"></div>
+    <div class="fx-noise" aria-hidden="true"></div>
+    <div class="fx-splash" id="fx-splash" aria-hidden="true"></div>
+
+    <!-- Preloader / Intro Animation -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-bg preloader-bg-top"></div>
+        <div class="preloader-bg preloader-bg-bottom"></div>
+        <div class="preloader-content">
+            <div class="preloader-text">
+                <h1 class="preloader-title">TRI MATIC</h1>
+            </div>
+            <div class="preloader-line"></div>
+            <div class="preloader-text">
+                <h2 class="preloader-title">BE THE PRIME</h2>
+            </div>
+        </div>
+        <div class="preloader-corners">
+            <div class="corner-info top-left">
+                <span>India</span>
+                <span>Est. 2024</span>
+            </div>
+            <div class="corner-info top-right">
+                <span>System Ready</span>
+                <span>V 2.0</span>
+            </div>
+            <div class="corner-counter">
+                <span id="counter">000</span>
+            </div>
+        </div>
+        <div class="preloader-noise"></div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content" id="main">
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             NAVBAR — lives outside .hero to avoid isolation/overflow bugs
+        ═══════════════════════════════════════════════════════════════ -->
+        <nav class="navbar" id="navbar" aria-label="Main navigation">
+            <div class="nav-inner">
+                <div class="nav-logo">
+                    <span class="logo-text">TRI MATIC</span>
+                </div>
+
+                <div class="nav-menu" id="nav-menu" role="navigation" aria-hidden="true">
+                    <a href="#about"          class="nav-link cursor-target">About</a>
+                    <a href="#services"       class="nav-link cursor-target">Services</a>
+                    <a href="#design-gallery" class="nav-link cursor-target">Design</a>
+                    <a href="#work"           class="nav-link cursor-target">Work</a>
+                    <a href="#pricing"        class="nav-link cursor-target">Pricing</a>
+                    <a href="#contact"        class="nav-link cursor-target">Contact</a>
+                    <!-- Mobile-only CTA inside the overlay -->
+                    <a href="#contact" class="nav-pill-mobile cursor-target">Let's Talk →</a>
+                </div>
+
+                <div class="nav-right">
+                    <a href="#contact" class="nav-pill magnetic-btn cursor-target">Let's Talk</a>
+                    <button class="nav-toggle" id="nav-toggle" type="button"
+                        aria-controls="nav-menu" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="nav-toggle__bar"></span>
+                        <span class="nav-toggle__bar"></span>
+                        <span class="nav-toggle__bar nav-toggle__bar--short"></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero" id="hero">
+
+            <!-- BG layers (CSS only, zero JS) -->
+            <div class="h-bg" aria-hidden="true">
+                <div class="h-bg__mesh"></div>
+                <div class="h-bg__noise"></div>
+                <div class="h-bg__vignette"></div>
+                <div class="h-bg__line h-bg__line--1"></div>
+                <div class="h-bg__line h-bg__line--2"></div>
+                <!-- Logo as atmospheric BG element with backlight -->
+                <div class="h-logo-container" aria-hidden="true">
+                    <div class="h-logo-glow"></div>
+                    <img src="assets/TriMatic.webp" class="h-logo-img" alt="">
+                </div>
+            </div>
+
+            <!-- Hero main -->
+            <div class="h-main">
+
+                <!-- Eyebrow tag -->
+                <div class="h-tag" id="hTag">
+                    <span class="h-tag__dot"></span>
+                    <span class="h-tag__text">Creative Video Studio &nbsp;/&nbsp; Est. 2024</span>
+                </div>
+
+                <!-- Headline — each word wrapped for clip reveal -->
+                <h1 class="h-title" id="hTitle" aria-label="We  Engineer Attention">
+                    <span class="h-title__row">
+                        <span class="h-title__clip"><span class="h-title__word">We</span></span>
+                        <span class="h-title__clip"><span class="h-title__word">Engineer</span></span>
+                    </span>
+                    <span class="h-title__row h-title__row--accent">
+                        <span class="h-title__clip"><span
+                                class="h-title__word h-title__word--stroke">Attention</span></span>
+                    </span>
+                </h1>
+
+                <!-- Bottom row: copy + stats + CTA -->
+                <div class="h-bottom" id="hBottom">
+                    <div class="h-bottom__left">
+                        <p class="h-desc">
+                            <span class="typewriter-text" id="typewriter"></span><span
+                                class="typewriter-cursor">|</span>
+                        </p>
+                        <div class="h-cta">
+                            <a href="#work" class="h-btn h-btn--fill magnetic-btn">
+                                <span>View Work</span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M7 7h10v10M7 17L17 7" />
+                                </svg>
+                            </a>
+                            <a href="#contact" class="h-btn h-btn--outline magnetic-btn">Start a Project</a>
+                        </div>
+                    </div>
+                    <!-- Redesigned HUD stats -->
+                    <div class="h-stats-hud">
+                        <div class="hud-bracket hud-bracket--l"></div>
+                        <div class="hud-content">
+                            <div class="hud-item">
+                                <span class="hud-val">10M<small>+</small></span>
+                                <span class="hud-lbl">Reach</span>
+                            </div>
+                            <div class="hud-sep"></div>
+                            <div class="hud-item">
+                                <span class="hud-val">500<small>+</small></span>
+                                <span class="hud-lbl">Projects</span>
+                            </div>
+                            <div class="hud-sep"></div>
+                            <div class="hud-item">
+                                <span class="hud-val">98<small>%</small></span>
+                                <span class="hud-lbl">Retention</span>
+                            </div>
+                        </div>
+                        <div class="hud-bracket hud-bracket--r"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Marquee strip -->
+            <div class="h-marquee" aria-hidden="true">
+                <div class="h-marquee__track">
+                    <span>Reels</span><em>◆</em>
+                    <span>Cinematics</span><em>◆</em>
+                    <span>Branding</span><em>◆</em>
+                    <span>Motion Graphics</span><em>◆</em>
+                    <span>Short Form</span><em>◆</em>
+                    <span>Thumbnails</span><em>◆</em>
+                    <span>LUTs</span><em>◆</em>
+                    <span>Phonk Edits</span><em>◆</em>
+                    <span>Reels</span><em>◆</em>
+                    <span>Cinematics</span><em>◆</em>
+                    <span>Branding</span><em>◆</em>
+                    <span>Motion Graphics</span><em>◆</em>
+                    <span>Short Form</span><em>◆</em>
+                    <span>Thumbnails</span><em>◆</em>
+                    <span>LUTs</span><em>◆</em>
+                    <span>Phonk Edits</span><em>◆</em>
+                </div>
+            </div>
+
+            <!-- Scroll indicator -->
+            <div class="h-scroll" id="hScroll">
+                <div class="h-scroll__mouse">
+                    <div class="h-scroll__wheel"></div>
+                </div>
+                <span>Scroll</span>
+            </div>
+
+        </section>
+
+
+
+        <!-- Trusted By Section -->
+        <section class="trusted-by" id="trusted-by">
+            <div class="container">
+                <span class="trusted-label">Trusted By Creators & Brands</span>
+            </div>
+            <div class="trusted-marquee">
+                <div class="trusted-track">
+                    <div class="trusted-item">YouTube Creators</div>
+                    <div class="trusted-divider">◆</div>
+                    <div class="trusted-item">Instagram Influencers</div>
+                    <div class="trusted-divider">◆</div>
+                    <div class="trusted-item">E-Commerce Brands</div>
+                    <div class="trusted-divider">◆</div>
+                    <div class="trusted-item">Music Artists</div>
+                    <div class="trusted-divider">◆</div>
+                    <div class="trusted-item">Tech Startups</div>
+                    <div class="trusted-divider">◆</div>
+                    <div class="trusted-item">Gaming Channels</div>
+                    <div class="trusted-divider">◆</div>
+                    <div class="trusted-item">Fitness Coaches</div>
+                    <div class="trusted-divider">◆</div>
+                    <div class="trusted-item">Real Estate</div>
+                    <div class="trusted-divider">◆</div>
+                    <div class="trusted-item">YouTube Creators</div>
+                    <div class="trusted-divider">◆</div>
+                    <div class="trusted-item">Instagram Influencers</div>
+                    <div class="trusted-divider">◆</div>
+                    <div class="trusted-item">E-Commerce Brands</div>
+                    <div class="trusted-divider">◆</div>
+                    <div class="trusted-item">Music Artists</div>
+                    <div class="trusted-divider">◆</div>
+                    <div class="trusted-item">Tech Startups</div>
+                    <div class="trusted-divider">◆</div>
+                    <div class="trusted-item">Gaming Channels</div>
+                    <div class="trusted-divider">◆</div>
+                    <div class="trusted-item">Fitness Coaches</div>
+                    <div class="trusted-divider">◆</div>
+                    <div class="trusted-item">Real Estate</div>
+                    <div class="trusted-divider">◆</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Beyond Logic Section -->
+        <section class="beyond-logic" id="philosophy">
+            <!-- Floating Particles -->
+            <div class="beyond-particles" id="beyond-particles"></div>
+
+            <div class="beyond-marquee-wrap">
+                <div class="beyond-marquee">
+                    <div class="beyond-marquee-track">
+                        <span>STRATEGY • BRANDING • MOTION • </span>
+                        <span>STRATEGY • BRANDING • MOTION • </span>
+                        <span>STRATEGY • BRANDING • MOTION • </span>
+                        <span>STRATEGY • BRANDING • MOTION • </span>
+                        <span>STRATEGY • BRANDING • MOTION • </span>
+                        <span>STRATEGY • BRANDING • MOTION • </span>
+                        <span>STRATEGY • BRANDING • MOTION • </span>
+                        <span>STRATEGY • BRANDING • MOTION • </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="beyond-content">
+                <div class="beyond-grid">
+                    <div class="beyond-title-wrap">
+                        <h2 class="beyond-title">
+                            <span class="title-char">B</span><span class="title-char">E</span><span
+                                class="title-char">Y</span><span class="title-char">O</span><span
+                                class="title-char">N</span><span class="title-char">D</span> <br>
+                            <span class="beyond-title-accent">Logic</span>
+                        </h2>
+                    </div>
+                    <div class="beyond-info">
+                        <p class="beyond-description">
+                            We don't just build websites; we build worlds.
+                            <span class="highlight">TRI MATIC</span> combines data-driven strategy with cinematic
+                            storytelling to create digital experiences that feel alive.
+                        </p>
+                        <a href="#about" class="beyond-link magnetic-btn">
+                            <div class="beyond-link-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 5v14"></path>
+                                    <path d="m19 12-7 7-7-7"></path>
+                                </svg>
+                            </div>
+                            <span>Our Philosophy</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Glowing orb decoration -->
+            <div class="beyond-orb"></div>
+        </section>
+
+
+
+        <!-- About Section -->
+        <section class="about" id="about">
+            <div class="gradient-mesh"></div>
+            <div class="floating-orb" style="top: 10%; left: 5%;"></div>
+            <div class="floating-orb" style="bottom: 20%; right: 10%; animation-delay: 5s;"></div>
+            <div class="container">
+                <div class="about-header">
+                    <span class="section-label">02 • Who We Are</span>
+                </div>
+                <div class="about-content">
+                    <p class="about-text" id="about-text">
+                        We don’t just create content. We engineer attention.
+                        In a world overwhelmed by noise, we design clarity.
+                        Through cinematic storytelling, precision editing, and scalable content systems, we build brands
+                        that don’t just exist — they move culture.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- ═══════════════════════════════════════
+             SERVICES SECTION
+        ═══════════════════════════════════════ -->
+        <section class="services-section" id="services">
+            <div class="services-inner">
+
+                <!-- Header -->
+                <div class="sv-header">
+                    <span class="section-label sv-label">03 • What We Craft</span>
+                    <h2 class="sv-title">
+                        <span class="sv-title-line"><span class="sv-title-word">Creative</span></span>
+                        <span class="sv-title-line sv-title-line--accent"><span class="sv-title-word">Services</span></span>
+                    </h2>
+                    <p class="sv-subtitle">Two disciplines. One vision. Infinite impact.</p>
+                </div>
+
+                <!-- Tab Switch -->
+                <div class="sv-tabs" role="tablist">
+                    <button class="sv-tab active" data-tab="video" role="tab" aria-selected="true">
+                        <span class="sv-tab-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                        </span>
+                        Video Editing
+                    </button>
+                    <button class="sv-tab" data-tab="design" role="tab" aria-selected="false">
+                        <span class="sv-tab-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                        </span>
+                        Graphic Design
+                    </button>
+                </div>
+
+                <!-- VIDEO EDITING PANEL -->
+                <div class="sv-panel active" id="panel-video">
+                    <div class="sv-grid">
+
+                        <div class="svc-card" data-index="01">
+                            <div class="svc-card-inner">
+                                <div class="svc-num">01</div>
+                                <div class="svc-body">
+                                    <div class="svc-icon-wrap">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 10l4.553-2.069A1 1 0 0121 8.87v6.26a1 1 0 01-1.447.9L15 14"/><rect x="3" y="6" width="12" height="12" rx="2"/></svg>
+                                    </div>
+                                    <h3 class="svc-name">Short Form Video Edits</h3>
+                                    <p class="svc-desc">Reels, Shorts &amp; TikTok-ready cuts engineered for viral reach. Fast-paced, high-retention storytelling.</p>
+                                    <div class="svc-tags">
+                                        <span>Instagram Reels</span><span>YouTube Shorts</span><span>TikTok</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="svc-line"></div>
+                        </div>
+
+                        <div class="svc-card" data-index="02">
+                            <div class="svc-card-inner">
+                                <div class="svc-num">02</div>
+                                <div class="svc-body">
+                                    <div class="svc-icon-wrap">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>
+                                    </div>
+                                    <h3 class="svc-name">Long Form Video Edits</h3>
+                                    <p class="svc-desc">Full-length YouTube videos, documentaries and brand films with cinematic pacing and chapter-perfect flow.</p>
+                                    <div class="svc-tags">
+                                        <span>YouTube Videos</span><span>Documentaries</span><span>Brand Films</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="svc-line"></div>
+                        </div>
+
+                        <div class="svc-card" data-index="03">
+                            <div class="svc-card-inner">
+                                <div class="svc-num">03</div>
+                                <div class="svc-body">
+                                    <div class="svc-icon-wrap">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                                    </div>
+                                    <h3 class="svc-name">Trendy / Phonk Edits</h3>
+                                    <p class="svc-desc">High-energy, hyper-realistic cinematic edits with aggressive cuts, phonk scoring and viral-coded aesthetics.</p>
+                                    <div class="svc-tags">
+                                        <span>Phonk Edits</span><span>Flashy Cuts</span><span>Trending</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="svc-line"></div>
+                        </div>
+
+                        <div class="svc-card" data-index="04">
+                            <div class="svc-card-inner">
+                                <div class="svc-num">04</div>
+                                <div class="svc-body">
+                                    <div class="svc-icon-wrap">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="2"/><path d="M12 2v20M2 12h20"/></svg>
+                                    </div>
+                                    <h3 class="svc-name">Logo Animations</h3>
+                                    <p class="svc-desc">Bring your brand mark to life with smooth, professional motion intros that make every video feel premium.</p>
+                                    <div class="svc-tags">
+                                        <span>Motion Logo</span><span>Intro Screen</span><span>Brand Reveal</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="svc-line"></div>
+                        </div>
+
+                        <div class="svc-card" data-index="05">
+                            <div class="svc-card-inner">
+                                <div class="svc-num">05</div>
+                                <div class="svc-body">
+                                    <div class="svc-icon-wrap">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                                    </div>
+                                    <h3 class="svc-name">Motion Design</h3>
+                                    <p class="svc-desc">Dynamic text animations, lower-thirds, transitions and kinetic typography that keep viewers locked in.</p>
+                                    <div class="svc-tags">
+                                        <span>Kinetic Text</span><span>Lower Thirds</span><span>Transitions</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="svc-line"></div>
+                        </div>
+
+                        <div class="svc-card" data-index="06">
+                            <div class="svc-card-inner">
+                                <div class="svc-num">06</div>
+                                <div class="svc-body">
+                                    <div class="svc-icon-wrap">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 3.93A9 9 0 0112 12V3a9 9 0 00-4 .93z"/></svg>
+                                    </div>
+                                    <h3 class="svc-name">Cinematic Aesthetics</h3>
+                                    <p class="svc-desc">Colour grading, custom LUTs and cinematic look development that transform raw footage into a visual masterpiece.</p>
+                                    <div class="svc-tags">
+                                        <span>Color Grading</span><span>LUT Packs</span><span>Film Look</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="svc-line"></div>
+                        </div>
+
+                    </div><!-- /sv-grid -->
+                </div><!-- /PANEL VIDEO -->
+
+                <!-- GRAPHIC DESIGN PANEL -->
+                <div class="sv-panel" id="panel-design">
+                    <div class="sv-grid">
+
+                        <div class="svc-card" data-index="01">
+                            <div class="svc-card-inner">
+                                <div class="svc-num">01</div>
+                                <div class="svc-body">
+                                    <div class="svc-icon-wrap">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                                    </div>
+                                    <h3 class="svc-name">Logo Design</h3>
+                                    <p class="svc-desc">Iconic, timeless logos that express your brand identity and leave a mark that's impossible to forget.</p>
+                                    <div class="svc-tags">
+                                        <span>Visual Identity</span><span>Brand Mark</span><span>Symbol</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="svc-line"></div>
+                        </div>
+
+                        <div class="svc-card" data-index="02">
+                            <div class="svc-card-inner">
+                                <div class="svc-num">02</div>
+                                <div class="svc-body">
+                                    <div class="svc-icon-wrap">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                                    </div>
+                                    <h3 class="svc-name">Brand Materials</h3>
+                                    <p class="svc-desc">Complete brand kits — from business cards and letterheads to social media assets and brand guidelines.</p>
+                                    <div class="svc-tags">
+                                        <span>Stationery</span><span>Brand Kit</span><span>Social Assets</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="svc-line"></div>
+                        </div>
+
+                        <div class="svc-card" data-index="03">
+                            <div class="svc-card-inner">
+                                <div class="svc-num">03</div>
+                                <div class="svc-body">
+                                    <div class="svc-icon-wrap">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                                    </div>
+                                    <h3 class="svc-name">Thumbnails &amp; Cover Pages</h3>
+                                    <p class="svc-desc">Click-commanding thumbnails and cover designs engineered to boost CTR and elevate your digital presence.</p>
+                                    <div class="svc-tags">
+                                        <span>YouTube CTR</span><span>Cover Art</span><span>Click Bait</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="svc-line"></div>
+                        </div>
+
+                        <div class="svc-card" data-index="04">
+                            <div class="svc-card-inner">
+                                <div class="svc-num">04</div>
+                                <div class="svc-body">
+                                    <div class="svc-icon-wrap">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/><path d="M8 2v16M16 6v16"/></svg>
+                                    </div>
+                                    <h3 class="svc-name">Intro Creation</h3>
+                                    <p class="svc-desc">Animated brand intros and opening sequences that instantly establish authority and brand recognition.</p>
+                                    <div class="svc-tags">
+                                        <span>Animated Intro</span><span>Opener</span><span>Brand Reveal</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="svc-line"></div>
+                        </div>
+
+                        <div class="svc-card" data-index="05">
+                            <div class="svc-card-inner">
+                                <div class="svc-num">05</div>
+                                <div class="svc-body">
+                                    <div class="svc-icon-wrap">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+                                    </div>
+                                    <h3 class="svc-name">Color Grading &amp; LUTs</h3>
+                                    <p class="svc-desc">Custom LUT pack creation and professional colour grading for consistent, cinematic visual identity across all content.</p>
+                                    <div class="svc-tags">
+                                        <span>Custom LUTs</span><span>Film Tone</span><span>Grade</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="svc-line"></div>
+                        </div>
+
+                        <div class="svc-card" data-index="06">
+                            <div class="svc-card-inner">
+                                <div class="svc-num">06</div>
+                                <div class="svc-body">
+                                    <div class="svc-icon-wrap">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                                    </div>
+                                    <h3 class="svc-name">Aesthetic Visual Edits</h3>
+                                    <p class="svc-desc">Artistic and editorial visual content for social media — moody, cinematic and trend-aligned graphic styles.</p>
+                                    <div class="svc-tags">
+                                        <span>Mood Board</span><span>Editorial</span><span>Social Content</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="svc-line"></div>
+                        </div>
+
+                    </div><!-- /sv-grid -->
+                </div><!-- /PANEL DESIGN -->
+
+            </div><!-- /services-inner -->
+        </section>
+
+
+        <!-- ═══════════════════════════════════════
+             FLOWING SERVICES — Hover-reveal rows
+        ═══════════════════════════════════════ -->
+        <section class="flowing-services" id="flowing-services" aria-label="Services Overview">
+
+            <div class="fs-row" tabindex="0">
+                <div class="fs-row-content">
+                    <span class="fs-num">01</span>
+                    <h3 class="fs-title">Short Form Video</h3>
+                    <span class="fs-meta">Reels &middot; Shorts &middot; TikTok</span>
+                </div>
+                <div class="fs-fill" aria-hidden="true">
+                    <div class="fs-marquee"><span>SHORT FORM VIDEO ✦ REELS ✦ YOUTUBE SHORTS ✦ TIKTOK ✦ INSTAGRAM ✦ VIRAL EDITS ✦ </span><span>SHORT FORM VIDEO ✦ REELS ✦ YOUTUBE SHORTS ✦ TIKTOK ✦ INSTAGRAM ✦ VIRAL EDITS ✦ </span></div>
+                </div>
+            </div>
+
+            <div class="fs-row" tabindex="0">
+                <div class="fs-row-content">
+                    <span class="fs-num">02</span>
+                    <h3 class="fs-title">Cinematic Edits</h3>
+                    <span class="fs-meta">Long Form &middot; Brand Films</span>
+                </div>
+                <div class="fs-fill" aria-hidden="true">
+                    <div class="fs-marquee"><span>CINEMATIC EDITS ✦ LONG FORM ✦ BRAND FILMS ✦ DOCUMENTARIES ✦ COLOR GRADE ✦ STORYTELLING ✦ </span><span>CINEMATIC EDITS ✦ LONG FORM ✦ BRAND FILMS ✦ DOCUMENTARIES ✦ COLOR GRADE ✦ STORYTELLING ✦ </span></div>
+                </div>
+            </div>
+
+            <div class="fs-row" tabindex="0">
+                <div class="fs-row-content">
+                    <span class="fs-num">03</span>
+                    <h3 class="fs-title">Phonk Edits</h3>
+                    <span class="fs-meta">Aggressive Cuts &middot; Viral</span>
+                </div>
+                <div class="fs-fill" aria-hidden="true">
+                    <div class="fs-marquee"><span>PHONK EDITS ✦ AGGRESSIVE CUTS ✦ VIRAL AESTHETICS ✦ TRENDING ✦ HIGH ENERGY ✦ FLASHY ✦ </span><span>PHONK EDITS ✦ AGGRESSIVE CUTS ✦ VIRAL AESTHETICS ✦ TRENDING ✦ HIGH ENERGY ✦ FLASHY ✦ </span></div>
+                </div>
+            </div>
+
+            <div class="fs-row" tabindex="0">
+                <div class="fs-row-content">
+                    <span class="fs-num">04</span>
+                    <h3 class="fs-title">Logo Design</h3>
+                    <span class="fs-meta">Brand Mark &middot; Identity</span>
+                </div>
+                <div class="fs-fill" aria-hidden="true">
+                    <div class="fs-marquee"><span>LOGO DESIGN ✦ BRAND MARK ✦ WORDMARK ✦ MONOGRAM ✦ ICON DESIGN ✦ IDENTITY ✦ </span><span>LOGO DESIGN ✦ BRAND MARK ✦ WORDMARK ✦ MONOGRAM ✦ ICON DESIGN ✦ IDENTITY ✦ </span></div>
+                </div>
+            </div>
+
+            <div class="fs-row" tabindex="0">
+                <div class="fs-row-content">
+                    <span class="fs-num">05</span>
+                    <h3 class="fs-title">Social Graphics</h3>
+                    <span class="fs-meta">Instagram &middot; Thumbnails</span>
+                </div>
+                <div class="fs-fill" aria-hidden="true">
+                    <div class="fs-marquee"><span>SOCIAL GRAPHICS ✦ THUMBNAILS ✦ BANNERS ✦ COVER PAGES ✦ STORIES ✦ POSTS ✦ </span><span>SOCIAL GRAPHICS ✦ THUMBNAILS ✦ BANNERS ✦ COVER PAGES ✦ STORIES ✦ POSTS ✦ </span></div>
+                </div>
+            </div>
+
+            <div class="fs-row" tabindex="0">
+                <div class="fs-row-content">
+                    <span class="fs-num">06</span>
+                    <h3 class="fs-title">Brand Kits</h3>
+                    <span class="fs-meta">Style Guides &middot; Materials</span>
+                </div>
+                <div class="fs-fill" aria-hidden="true">
+                    <div class="fs-marquee"><span>BRAND KITS ✦ STYLE GUIDES ✦ STATIONERY ✦ MATERIALS ✦ PACKAGING ✦ GUIDELINES ✦ </span><span>BRAND KITS ✦ STYLE GUIDES ✦ STATIONERY ✦ MATERIALS ✦ PACKAGING ✦ GUIDELINES ✦ </span></div>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ═══════════════════════════════════════
+             3D GLOBE — GRAPHIC DESIGN EXPERTISE
+        ═══════════════════════════════════════ -->
+        <section class="globe-section" id="expertise">
+            <div class="globe-noise" aria-hidden="true"></div>
+            <div class="globe-inner">
+
+                <!-- Left: content -->
+                <div class="globe-content">
+                    <span class="section-label">04 • Our Expertise</span>
+                    <h2 class="globe-title">
+                        <span class="gt-line"><span class="gt-word">Design</span></span>
+                        <span class="gt-line gt-line--alt"><span class="gt-word">Universe</span></span>
+                    </h2>
+                    <p class="globe-desc">
+                        Every pixel has a purpose. We craft visual identities that speak before words do — from logos that define legacy to graphics that stop the scroll.
+                    </p>
+                    <div class="globe-stats">
+                        <div class="gstat">
+                            <span class="gstat-num" data-target="200">0</span><span class="gstat-unit">+</span>
+                            <span class="gstat-lbl">Logos Created</span>
+                        </div>
+                        <div class="gstat-div"></div>
+                        <div class="gstat">
+                            <span class="gstat-num" data-target="1000">0</span><span class="gstat-unit">+</span>
+                            <span class="gstat-lbl">Graphics Made</span>
+                        </div>
+                        <div class="gstat-div"></div>
+                        <div class="gstat">
+                            <span class="gstat-num" data-target="50">0</span><span class="gstat-unit">+</span>
+                            <span class="gstat-lbl">Brands Served</span>
+                        </div>
+                    </div>
+                    <a href="#contact" class="globe-cta magnetic-btn">
+                        <span>Start a Design Project</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 7h10v10M7 17L17 7"/></svg>
+                    </a>
+                </div>
+
+                <!-- Right: Canvas Globe -->
+                <div class="globe-canvas-wrap" id="globe-wrap">
+                    <canvas id="globe-canvas" aria-label="Interactive 3D sphere showing graphic design services"></canvas>
+                    <div class="globe-glow-core" aria-hidden="true"></div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ═══════════════════════════════════════
+             3D CIRCULAR DESIGN GALLERY
+        ═══════════════════════════════════════ -->
+        <section class="design-gallery" id="design-gallery">
+            <div class="dg-bg" aria-hidden="true"></div>
+
+            <div class="dg-inner">
+
+                <div class="dg-header">
+                    <span class="section-label dg-label">05 &bull; Design Portfolio</span>
+                    <h2 class="dg-title">
+                        <span class="dg-tl"><span class="dg-tw">Visual</span></span>
+                        <span class="dg-tl dg-tl--alt"><span class="dg-tw">Designs</span></span>
+                    </h2>
+                    <p class="dg-desc">Logos &nbsp;&middot;&nbsp; Brand Kits &nbsp;&middot;&nbsp; Social Graphics &nbsp;&middot;&nbsp; Thumbnails &nbsp;&middot;&nbsp; Covers</p>
+                    <p class="dg-hint">Drag to spin &nbsp;&middot;&nbsp; Click to preview</p>
+                </div>
+
+                <div class="dg-stage" id="dgStage">
+                    <div class="dg-ring" id="dgRing">
+
+                        <div class="dg-card" data-i="0" data-cat="Logo Design">
+                            <div class="dg-card-vis">
+                                <div class="da1"></div><div class="da2"></div>
+                                <span class="dg-card-caption">Logo Design</span>
+                            </div>
+                            <div class="dg-card-foot"><span class="dg-card-n">01</span><span class="dg-card-c">Logo Design</span></div>
+                        </div>
+
+                        <div class="dg-card" data-i="1" data-cat="Brand Identity">
+                            <div class="dg-card-vis">
+                                <div class="da1"></div><div class="da2"></div>
+                                <span class="dg-card-caption">Brand Identity</span>
+                            </div>
+                            <div class="dg-card-foot"><span class="dg-card-n">02</span><span class="dg-card-c">Brand Identity</span></div>
+                        </div>
+
+                        <div class="dg-card" data-i="2" data-cat="Thumbnail Design">
+                            <div class="dg-card-vis">
+                                <div class="da1"></div><div class="da2"></div>
+                                <span class="dg-card-caption">Thumbnails</span>
+                            </div>
+                            <div class="dg-card-foot"><span class="dg-card-n">03</span><span class="dg-card-c">Thumbnail Design</span></div>
+                        </div>
+
+                        <div class="dg-card" data-i="3" data-cat="Social Media">
+                            <div class="dg-card-vis">
+                                <div class="da1"></div><div class="da2"></div>
+                                <span class="dg-card-caption">Social Media</span>
+                            </div>
+                            <div class="dg-card-foot"><span class="dg-card-n">04</span><span class="dg-card-c">Social Media</span></div>
+                        </div>
+
+                        <div class="dg-card" data-i="4" data-cat="Cover Pages">
+                            <div class="dg-card-vis">
+                                <div class="da1"></div><div class="da2"></div>
+                                <span class="dg-card-caption">Cover Pages</span>
+                            </div>
+                            <div class="dg-card-foot"><span class="dg-card-n">05</span><span class="dg-card-c">Cover Pages</span></div>
+                        </div>
+
+                        <div class="dg-card" data-i="5" data-cat="Motion Intros">
+                            <div class="dg-card-vis">
+                                <div class="da1"></div><div class="da2"></div>
+                                <span class="dg-card-caption">Motion Intros</span>
+                            </div>
+                            <div class="dg-card-foot"><span class="dg-card-n">06</span><span class="dg-card-c">Motion Intros</span></div>
+                        </div>
+
+                        <div class="dg-card" data-i="6" data-cat="Color Grading">
+                            <div class="dg-card-vis">
+                                <div class="da1"></div><div class="da2"></div>
+                                <span class="dg-card-caption">Color Grading</span>
+                            </div>
+                            <div class="dg-card-foot"><span class="dg-card-n">07</span><span class="dg-card-c">Color Grading</span></div>
+                        </div>
+
+                        <div class="dg-card" data-i="7" data-cat="LUT Packs">
+                            <div class="dg-card-vis">
+                                <div class="da1"></div><div class="da2"></div>
+                                <span class="dg-card-caption">LUT Packs</span>
+                            </div>
+                            <div class="dg-card-foot"><span class="dg-card-n">08</span><span class="dg-card-c">LUT Packs</span></div>
+                        </div>
+
+                        <div class="dg-card" data-i="8" data-cat="Brand Materials">
+                            <div class="dg-card-vis">
+                                <div class="da1"></div><div class="da2"></div>
+                                <span class="dg-card-caption">Brand Materials</span>
+                            </div>
+                            <div class="dg-card-foot"><span class="dg-card-n">09</span><span class="dg-card-c">Brand Materials</span></div>
+                        </div>
+
+                        <div class="dg-card" data-i="9" data-cat="Poster Design">
+                            <div class="dg-card-vis">
+                                <div class="da1"></div><div class="da2"></div>
+                                <span class="dg-card-caption">Poster Design</span>
+                            </div>
+                            <div class="dg-card-foot"><span class="dg-card-n">10</span><span class="dg-card-c">Poster Design</span></div>
+                        </div>
+
+                    </div><!-- /dg-ring -->
+                </div><!-- /dg-stage -->
+
+                <div class="dg-controls">
+                    <button class="dg-nav-btn dg-prev cursor-target" id="dgPrev" aria-label="Previous">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+                    </button>
+                    <div class="dg-counter">
+                        <span class="dg-idx" id="dgIdx">01</span><span class="dg-sep"> / </span><span class="dg-tot">10</span>
+                    </div>
+                    <button class="dg-nav-btn dg-next cursor-target" id="dgNext" aria-label="Next">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+                    </button>
+                </div>
+
+            </div><!-- /dg-inner -->
+
+            <!-- Lightbox -->
+            <div class="dg-lightbox" id="dgLightbox" hidden>
+                <div class="dg-lb-backdrop" id="dgLbBackdrop"></div>
+                <div class="dg-lb-card">
+                    <button class="dg-lb-close" id="dgLbClose" aria-label="Close">&times;</button>
+                    <div class="dg-lb-visual" id="dgLbVisual"></div>
+                    <div class="dg-lb-info">
+                        <span class="dg-lb-num" id="dgLbNum"></span>
+                        <h3 class="dg-lb-title" id="dgLbTitle"></h3>
+                        <p class="dg-lb-note">Replace placeholder with your actual design work</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ═══════════════════════════════════════
+             VIDEO WORK SHOWCASE
+        ═══════════════════════════════════════ -->
+        <section class="work-showcase" id="work">
+            <div class="ws-noise" aria-hidden="true"></div>
+            <div class="ws-inner">
+
+                <div class="ws-header">
+                    <div class="ws-header-left">
+                        <span class="section-label">06 • Our Work</span>
+                        <h2 class="ws-title">
+                            <span class="wt-line"><span class="wt-word">Featured</span></span>
+                            <span class="wt-line wt-line--stroke"><span class="wt-word">Projects</span></span>
+                        </h2>
+                    </div>
+                    <div class="ws-header-right">
+                        <p class="ws-desc">Explore our portfolio across all categories — from cinematic films to viral short-form content and brand identities.</p>
+                        <a href="https://bento.me/trimatic" target="_blank" rel="noopener" class="ws-viewall magnetic-btn">
+                            <span>View All Work</span>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 7h10v10M7 17L17 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Category Filter -->
+                <div class="ws-filters" role="group" aria-label="Work category filter">
+                    <button class="wf-btn active" data-filter="all">All</button>
+                    <button class="wf-btn" data-filter="shortform">Short Form</button>
+                    <button class="wf-btn" data-filter="cinematic">Cinematic</button>
+                    <button class="wf-btn" data-filter="phonk">Phonk Edits</button>
+                    <button class="wf-btn" data-filter="motion">Motion Design</button>
+                    <button class="wf-btn" data-filter="graphic">Graphic Design</button>
+                </div>
+
+                <!-- Work Grid -->
+                <div class="ws-grid" id="wsGrid">
+
+                    <div class="ws-card" data-category="shortform">
+                        <div class="wsc-visual wsc-visual--v1">
+                            <div class="wsc-filmgrain"></div>
+                            <div class="wsc-overlay"></div>
+                            <div class="wsc-center-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                            </div>
+                        </div>
+                        <div class="wsc-info">
+                            <span class="wsc-cat">Short Form</span>
+                            <h3 class="wsc-name">Reel Mastery</h3>
+                            <p class="wsc-meta">Fast-cut · Trending Audio · Motion Text</p>
+                        </div>
+                        <a href="https://bento.me/trimatic" target="_blank" class="wsc-link" aria-label="View Reel Mastery"></a>
+                    </div>
+
+                    <div class="ws-card ws-card--tall" data-category="cinematic">
+                        <div class="wsc-visual wsc-visual--v2">
+                            <div class="wsc-filmgrain"></div>
+                            <div class="wsc-overlay"></div>
+                            <div class="wsc-center-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                            </div>
+                        </div>
+                        <div class="wsc-info">
+                            <span class="wsc-cat">Cinematic</span>
+                            <h3 class="wsc-name">Cinema Grade</h3>
+                            <p class="wsc-meta">LUT Grade · Film Tone · Storytelling</p>
+                        </div>
+                        <a href="https://bento.me/trimatic" target="_blank" class="wsc-link" aria-label="View Cinema Grade"></a>
+                    </div>
+
+                    <div class="ws-card" data-category="phonk">
+                        <div class="wsc-visual wsc-visual--v3">
+                            <div class="wsc-filmgrain"></div>
+                            <div class="wsc-overlay"></div>
+                            <div class="wsc-center-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                            </div>
+                        </div>
+                        <div class="wsc-info">
+                            <span class="wsc-cat">Phonk Edit</span>
+                            <h3 class="wsc-name">Phonk Fury</h3>
+                            <p class="wsc-meta">Aggressive Cuts · Phonk Score · Viral</p>
+                        </div>
+                        <a href="https://bento.me/trimatic" target="_blank" class="wsc-link" aria-label="View Phonk Fury"></a>
+                    </div>
+
+                    <div class="ws-card" data-category="shortform">
+                        <div class="wsc-visual wsc-visual--v4">
+                            <div class="wsc-filmgrain"></div>
+                            <div class="wsc-overlay"></div>
+                            <div class="wsc-center-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                            </div>
+                        </div>
+                        <div class="wsc-info">
+                            <span class="wsc-cat">Short Form</span>
+                            <h3 class="wsc-name">Creator Edits</h3>
+                            <p class="wsc-meta">YouTube Shorts · Hook-Driven · High Energy</p>
+                        </div>
+                        <a href="https://bento.me/trimatic" target="_blank" class="wsc-link" aria-label="View Creator Edits"></a>
+                    </div>
+
+                    <div class="ws-card ws-card--tall" data-category="motion">
+                        <div class="wsc-visual wsc-visual--v5">
+                            <div class="wsc-filmgrain"></div>
+                            <div class="wsc-overlay"></div>
+                            <div class="wsc-motion-lines" aria-hidden="true">
+                                <div></div><div></div><div></div><div></div><div></div>
+                            </div>
+                        </div>
+                        <div class="wsc-info">
+                            <span class="wsc-cat">Motion Design</span>
+                            <h3 class="wsc-name">Motion Sequence</h3>
+                            <p class="wsc-meta">Kinetic Typography · Lower-Thirds · Transitions</p>
+                        </div>
+                        <a href="https://bento.me/trimatic" target="_blank" class="wsc-link" aria-label="View Motion Sequence"></a>
+                    </div>
+
+                    <div class="ws-card" data-category="graphic">
+                        <div class="wsc-visual wsc-visual--v6">
+                            <div class="wsc-filmgrain"></div>
+                            <div class="wsc-overlay"></div>
+                            <div class="wsc-logo-anim" aria-hidden="true">
+                                <span>TM</span>
+                            </div>
+                        </div>
+                        <div class="wsc-info">
+                            <span class="wsc-cat">Graphic Design</span>
+                            <h3 class="wsc-name">Brand Identity</h3>
+                            <p class="wsc-meta">Logo · Brand Kit · Visual Identity</p>
+                        </div>
+                        <a href="https://bento.me/trimatic" target="_blank" class="wsc-link" aria-label="View Brand Identity"></a>
+                    </div>
+
+                    <div class="ws-card" data-category="cinematic">
+                        <div class="wsc-visual wsc-visual--v7">
+                            <div class="wsc-filmgrain"></div>
+                            <div class="wsc-overlay"></div>
+                            <div class="wsc-center-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                            </div>
+                        </div>
+                        <div class="wsc-info">
+                            <span class="wsc-cat">Cinematic</span>
+                            <h3 class="wsc-name">Brand Film</h3>
+                            <p class="wsc-meta">Commercial · Narrative · Colour Story</p>
+                        </div>
+                        <a href="https://bento.me/trimatic" target="_blank" class="wsc-link" aria-label="View Brand Film"></a>
+                    </div>
+
+                    <div class="ws-card" data-category="graphic">
+                        <div class="wsc-visual wsc-visual--v8">
+                            <div class="wsc-filmgrain"></div>
+                            <div class="wsc-overlay"></div>
+                            <div class="wsc-thumb-grid" aria-hidden="true">
+                                <div></div><div></div><div></div><div></div>
+                            </div>
+                        </div>
+                        <div class="wsc-info">
+                            <span class="wsc-cat">Graphic Design</span>
+                            <h3 class="wsc-name">Thumbnail Pack</h3>
+                            <p class="wsc-meta">YouTube CTR · Bold Type · Click Magnet</p>
+                        </div>
+                        <a href="https://bento.me/trimatic" target="_blank" class="wsc-link" aria-label="View Thumbnail Pack"></a>
+                    </div>
+
+                </div><!-- /ws-grid -->
+
+            </div><!-- /ws-inner -->
+        </section>
+
+
+        <!-- ═══════════════════════════════════════
+             PRICING PLANS
+        ═══════════════════════════════════════ -->
+        <section class="pricing-section" id="pricing">
+            <div class="ps-bg-grid" aria-hidden="true"></div>
+            <div class="ps-inner">
+
+                <div class="ps-header">
+                    <span class="section-label">06 • Investment</span>
+                    <h2 class="ps-title">
+                        <span class="pt-line"><span class="pt-word">Simple</span></span>
+                        <span class="pt-line pt-line--accent"><span class="pt-word">Pricing</span></span>
+                    </h2>
+                    <p class="ps-subtitle">No hidden fees. No surprises. Just cinematic value.</p>
+                </div>
+
+                <div class="ps-grid">
+
+                    <!-- BASIC -->
+                    <div class="pricing-card pc-basic" data-tier="basic">
+                        <div class="pc-top">
+                            <div class="pc-tier-badge">Starter</div>
+                            <h3 class="pc-tier">BASIC</h3>
+                            <p class="pc-tagline">Perfect for growing creators getting their content game up.</p>
+                        </div>
+                        <div class="pc-divider"></div>
+                        <ul class="pc-features">
+                            <li><span class="pf-check">✓</span> Short Form Video Edit (up to 90s)</li>
+                            <li><span class="pf-check">✓</span> Basic Colour Correction</li>
+                            <li><span class="pf-check">✓</span> Background Music Sync</li>
+                            <li><span class="pf-check">✓</span> Text &amp; Caption Overlay</li>
+                            <li><span class="pf-check">✓</span> 2 Revision Rounds</li>
+                            <li><span class="pf-check">✓</span> Delivery in 3–5 Days</li>
+                            <li class="pf-muted"><span class="pf-cross">✗</span> Motion Graphics</li>
+                            <li class="pf-muted"><span class="pf-cross">✗</span> Custom LUT Grading</li>
+                        </ul>
+                        <a href="#contact" class="pc-cta magnetic-btn">Get Started</a>
+                    </div>
+
+                    <!-- STANDARD (featured) -->
+                    <div class="pricing-card pc-standard featured" data-tier="standard">
+                        <div class="pc-popular-badge">
+                            <span>◆ Most Popular</span>
+                        </div>
+                        <div class="pc-top">
+                            <div class="pc-tier-badge">Professional</div>
+                            <h3 class="pc-tier">STANDARD</h3>
+                            <p class="pc-tagline">For serious creators and brands ready to scale their content.</p>
+                        </div>
+                        <div class="pc-divider"></div>
+                        <ul class="pc-features">
+                            <li><span class="pf-check">✓</span> Short &amp; Long Form Edits</li>
+                            <li><span class="pf-check">✓</span> Advanced Colour Grading</li>
+                            <li><span class="pf-check">✓</span> Custom Motion Graphics</li>
+                            <li><span class="pf-check">✓</span> Sound Design &amp; SFX</li>
+                            <li><span class="pf-check">✓</span> Logo Animation</li>
+                            <li><span class="pf-check">✓</span> 3 Revision Rounds</li>
+                            <li><span class="pf-check">✓</span> Rush Delivery (2–3 Days)</li>
+                            <li><span class="pf-check">✓</span> Thumbnail Design Included</li>
+                        </ul>
+                        <a href="#contact" class="pc-cta pc-cta--featured magnetic-btn">Get Started</a>
+                        <div class="pc-glow-border" aria-hidden="true"></div>
+                    </div>
+
+                    <!-- ADVANCE -->
+                    <div class="pricing-card pc-advance" data-tier="advance">
+                        <div class="pc-top">
+                            <div class="pc-tier-badge">Cinematic</div>
+                            <h3 class="pc-tier">ADVANCE</h3>
+                            <p class="pc-tagline">The full cinematic arsenal for premium brands and creators.</p>
+                        </div>
+                        <div class="pc-divider"></div>
+                        <ul class="pc-features">
+                            <li><span class="pf-check">✓</span> All Formats &amp; Lengths</li>
+                            <li><span class="pf-check">✓</span> Hyper-Realistic Cinematic Grade</li>
+                            <li><span class="pf-check">✓</span> Custom LUT Pack Creation</li>
+                            <li><span class="pf-check">✓</span> Full Motion Design Package</li>
+                            <li><span class="pf-check">✓</span> Phonk / Cinematic Scoring</li>
+                            <li><span class="pf-check">✓</span> Unlimited Revisions</li>
+                            <li><span class="pf-check">✓</span> Priority Delivery (1–2 Days)</li>
+                            <li><span class="pf-check">✓</span> Full Brand Identity Pack</li>
+                        </ul>
+                        <a href="#contact" class="pc-cta magnetic-btn">Get Started</a>
+                    </div>
+
+                </div><!-- /ps-grid -->
+
+                <div class="ps-note">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    Prices vary by project complexity. <a href="#contact">Contact us</a> for a custom quote tailored to your needs.
+                </div>
+
+            </div><!-- /ps-inner -->
+        </section>
+
+
+        <!-- ═══════════════════════════════════════
+             CONTACT + FOOTER
+        ═══════════════════════════════════════ -->
+        <section class="contact-section" id="contact">
+            <div class="cs-bg" aria-hidden="true"></div>
+
+            <div class="cs-inner">
+
+                <!-- Section header — centered above both columns -->
+                <div class="cs-header">
+                    <div class="cs-eyebrow">
+                        <span class="cs-dot"></span>
+                        <span>Available for projects — Est. 2024 · India</span>
+                    </div>
+
+                    <h2 class="cs-title" id="csTitle">
+                        <span class="cs-title-line"><span class="cs-title-word">Let's Create</span></span>
+                        <span class="cs-title-line cs-title-line--outline"><span class="cs-title-word">Something</span></span>
+                        <span class="cs-title-line"><span class="cs-title-word">Legendary</span></span>
+                    </h2>
+
+                    <p class="cs-sub">Drop a message or reach out directly — we respond fast.</p>
+                </div>
+
+                <!-- Two-column body -->
+                <div class="cs-body">
+
+                    <!-- LEFT — channels + availability -->
+                    <div class="cs-left">
+                        <div class="cs-avail-badge">
+                            <span class="cs-avail-dot"></span>
+                            <span>Open for new projects in 2026</span>
+                        </div>
+
+                        <div class="cs-channels">
+                            <a href="https://www.instagram.com/trimatic_/" target="_blank" rel="noopener" class="cs-channel magnetic-btn">
+                                <div class="csch-icon">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                                </div>
+                                <div class="csch-text">
+                                    <span class="csch-label">Instagram</span>
+                                    <span class="csch-handle">@trimatic_</span>
+                                </div>
+                                <div class="csch-arrow">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h10v10M7 17L17 7"/></svg>
+                                </div>
+                            </a>
+
+                            <a href="mailto:tri.matic.ns@gmail.com" class="cs-channel magnetic-btn">
+                                <div class="csch-icon">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                </div>
+                                <div class="csch-text">
+                                    <span class="csch-label">Email</span>
+                                    <span class="csch-handle">tri.matic.ns@gmail.com</span>
+                                </div>
+                                <div class="csch-arrow">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h10v10M7 17L17 7"/></svg>
+                                </div>
+                            </a>
+
+                            <a href="https://wa.me/+917970869003" target="_blank" rel="noopener" class="cs-channel magnetic-btn">
+                                <div class="csch-icon">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+                                </div>
+                                <div class="csch-text">
+                                    <span class="csch-label">WhatsApp</span>
+                                    <span class="csch-handle">+91 79708 69003</span>
+                                </div>
+                                <div class="csch-arrow">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h10v10M7 17L17 7"/></svg>
+                                </div>
+                            </a>
+                        </div>
+
+                        <p class="cs-left-note">Typical response time is under 12 hours.</p>
+                    </div>
+
+                    <!-- RIGHT — contact form -->
+                    <div class="cs-right">
+                        <form class="cs-form" id="csForm" novalidate>
+                            <div class="cs-form__row">
+                                <div class="cs-field">
+                                    <label class="cs-field__label" for="cf-name">Your Name</label>
+                                    <input class="cs-field__input" id="cf-name" type="text" name="name"
+                                        placeholder="John Doe" autocomplete="name" required>
+                                </div>
+                                <div class="cs-field">
+                                    <label class="cs-field__label" for="cf-email">Email Address</label>
+                                    <input class="cs-field__input" id="cf-email" type="email" name="email"
+                                        placeholder="you@example.com" autocomplete="email" required>
+                                </div>
+                            </div>
+
+                            <div class="cs-field">
+                                <label class="cs-field__label" for="cf-service">Service Needed</label>
+                                <div class="cs-select-wrap">
+                                    <select class="cs-field__input cs-field__select" id="cf-service" name="service">
+                                        <option value="" disabled selected>Select a service…</option>
+                                        <option value="short-form">Short Form Video</option>
+                                        <option value="cinematic">Cinematic Edit</option>
+                                        <option value="phonk">Phonk / Trending Edit</option>
+                                        <option value="logo">Logo Design</option>
+                                        <option value="social">Social Media Graphics</option>
+                                        <option value="brand-kit">Brand Kit</option>
+                                        <option value="other">Other / Not Sure</option>
+                                    </select>
+                                    <span class="cs-select-arrow">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="cs-field">
+                                <label class="cs-field__label" for="cf-msg">Message</label>
+                                <textarea class="cs-field__input cs-field__textarea" id="cf-msg" name="message"
+                                    placeholder="Tell us about your project, timeline, budget…" rows="5" required></textarea>
+                            </div>
+
+                            <button class="cs-form__submit magnetic-btn" type="submit">
+                                <span class="cs-submit-text">Send Message</span>
+                                <span class="cs-submit-icon">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+                                </span>
+                            </button>
+
+                            <!-- Success state -->
+                            <div class="cs-form__success" id="csFormSuccess" hidden>
+                                <span class="cs-success-icon">✓</span>
+                                <span>Message sent! We'll be in touch soon.</span>
+                            </div>
+                        </form>
+                    </div>
+
+                </div><!-- /cs-body -->
+
+                <!-- Footer Bar -->
+                <div class="cs-footer-bar">
+                    <div class="cs-footer-left">
+                        <span class="cs-logo-text">TRI MATIC</span>
+                        <span class="cs-footer-tagline">Be The Prime.</span>
+                    </div>
+                    <div class="cs-footer-center">
+                        <span>© 2026 Tri Matic · India</span>
+                    </div>
+                    <div class="cs-footer-right">
+                        <a href="https://bento.me/trimatic" target="_blank" rel="noopener">Portfolio ↗</a>
+                        <a href="https://www.instagram.com/trimatic_/" target="_blank" rel="noopener">Instagram ↗</a>
+                    </div>
+                </div>
+
+            </div><!-- /cs-inner -->
+        </section>
+
+    </main>
+    <!-- Floating CTA -->
+    <a href="#contact" id="floating-cta" class="floating-cta magnetic-btn" aria-label="Start a Project">Let's Talk</a>
+
+    <!-- Scripts -->
+    <div id="a11y-live" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
