@@ -17,20 +17,13 @@ const lenis = new Lenis({
     smoothTouch: false,
     touchMultiplier: 2,
 });
+window.lenis = lenis; // expose for preloader & lightbox scroll-lock
 
-function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-}
-
-requestAnimationFrame(raf);
-
-// Integrate Lenis with ScrollTrigger
+// Single Lenis driver via GSAP ticker (no duplicate RAF loop)
 lenis.on('scroll', ScrollTrigger.update);
 gsap.ticker.add((time) => {
     lenis.raf(time * 1000);
 });
-gsap.ticker.lagSmoothing(0);
 
 /* ========================================
    Initialization
@@ -104,10 +97,11 @@ function initHeroNew() {
         }
     }
 
-    // Mouse-tracking spotlight (CSS var approach — no canvas, no RAF loop)
+    // Mouse-tracking spotlight — paused off-screen, skipped on touch
     const hero = document.getElementById('hero');
-    if (hero) {
-        let mx = 50, my = 40, cx = 50, cy = 40, raf;
+    if (hero && window.matchMedia('(hover: hover)').matches) {
+        let mx = 50, my = 40, cx = 50, cy = 40, meshRaf;
+        let heroVisible = true;
         hero.addEventListener('mousemove', e => {
             const r = hero.getBoundingClientRect();
             mx = ((e.clientX - r.left) / r.width) * 100;
@@ -115,69 +109,67 @@ function initHeroNew() {
         });
         const mesh = hero.querySelector('.h-bg__mesh');
         if (mesh) {
-            (function loop() {
+            function meshLoop() {
+                if (!heroVisible) return;
                 cx += (mx - cx) * 0.05;
                 cy += (my - cy) * 0.05;
                 mesh.style.background = `
                     radial-gradient(ellipse 55% 45% at ${cx}% ${cy}%, rgba(254,110,0,0.16) 0%, transparent 60%),
                     radial-gradient(ellipse 50% 60% at ${100 - cx}% ${100 - cy}%, rgba(67,97,238,0.10) 0%, transparent 60%),
                     #080808`;
-                raf = requestAnimationFrame(loop);
-            })();
+                meshRaf = requestAnimationFrame(meshLoop);
+            }
+            // Pause when hero leaves viewport
+            const heroObs = new IntersectionObserver(entries => {
+                heroVisible = entries[0].isIntersecting;
+                if (heroVisible) meshLoop();
+                else cancelAnimationFrame(meshRaf);
+            }, { threshold: 0 });
+            heroObs.observe(hero);
+            meshLoop();
         }
     }
 }
 
 window.addEventListener('load', () => {
+    // CRITICAL — above-the-fold (init immediately)
     initPreloader();
     initCustomCursor();
     initHeroNew();
     initNavigation();
-    initBeyondLogic();
-    initMagneticButtons();
-
-    // ENHANCED FEATURES
-    initTypewriter();
     initGlassmorphNavbar();
-    initAboutTextReveal();
     initSmoothScrollLinks();
-    initRippleEffect();
-    initScrollReveal();
-    initParallaxSections();
-    initImageLazyReveal();
 
-    // NEW SECTIONS
-    initServicesSection();
-    initGlobeCanvas();
-    initWorkShowcase();
-    initPricingSection();
-    initContactAnimations();
-
-    // REACTBITS FEATURES
-    initFlowingServices();
-    initCircularGallery();
-    initMagicBentoSpotlight();
-    initTargetCursor();
+    // DEFERRED — below-fold sections (idle or after 2s fallback)
+    const deferInit = () => {
+        initBeyondLogic();
+        initMagneticButtons();
+        initTypewriter();
+        initAboutTextReveal();
+        initRippleEffect();
+        initScrollReveal();
+        initParallaxSections();
+        initImageLazyReveal();
+        initServicesSection();
+        initGlobeCanvas();
+        initWorkShowcase();
+        initPricingSection();
+        initContactAnimations();
+        initFooterSpotlight();
+        initFlowingServices();
+        initCircularGallery();
+        initMagicBentoSpotlight();
+        initTargetCursor();
+        initPauseOffscreenAnimations();
+    };
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(deferInit, { timeout: 2000 });
+    } else {
+        setTimeout(deferInit, 100);
+    }
 });
 
 
-
-/* ========================================
-   Footer Spotlight
-   ======================================== */
-function initFooterSpotlight() {
-    const brandText = document.querySelector('.footer-brand-text');
-    if (!brandText) return;
-
-    brandText.addEventListener('mousemove', (e) => {
-        const rect = brandText.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        brandText.style.setProperty('--x', `${x}px`);
-        brandText.style.setProperty('--y', `${y}px`);
-    });
-}
 
 /* ========================================
    Accessibility: Live Announcements
@@ -294,6 +286,9 @@ function initPreloader() {
    Custom Cursor
    ======================================== */
 function initCustomCursor() {
+    // Skip entirely on touch devices — no cursor needed
+    if (window.matchMedia('(hover: none)').matches) return;
+
     const cursor = document.getElementById('cursor');
     const links = document.querySelectorAll('a, button, .work-item, .service-item, .perspective-item, .bento-item, .filter-btn, .lab-tab');
 
@@ -339,31 +334,7 @@ function initCustomCursor() {
         });
     });
 
-    // Add magnetic effect to CTAs
-    const ctaButtons = document.querySelectorAll('.cta-button, .cta-secondary, .magnetic-btn');
-    ctaButtons.forEach(btn => {
-        btn.addEventListener('mousemove', (e) => {
-            const rect = btn.getBoundingClientRect();
-            const x = e.clientX - rect.left - rect.width / 2;
-            const y = e.clientY - rect.top - rect.height / 2;
-
-            gsap.to(btn, {
-                x: x * 0.3,
-                y: y * 0.3,
-                duration: 0.3,
-                ease: 'power2.out'
-            });
-        });
-
-        btn.addEventListener('mouseleave', () => {
-            gsap.to(btn, {
-                x: 0,
-                y: 0,
-                duration: 0.5,
-                ease: 'elastic.out(1, 0.5)'
-            });
-        });
-    });
+    // Magnetic effect moved to initMagneticButtons() to avoid duplicate listeners
 }
 
 /* ========================================
@@ -1014,6 +985,7 @@ function initBeyondLogic() {
 
     // Create Particles
     const particleCount = 20;
+    const particleTweens = [];
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
         particle.classList.add('particle');
@@ -1027,8 +999,8 @@ function initBeyondLogic() {
 
         particlesContainer.appendChild(particle);
 
-        // Animate
-        gsap.to(particle, {
+        // Animate — store tween to pause/play on visibility
+        const tw = gsap.to(particle, {
             y: '+=100',
             x: '+=' + (Math.random() * 50 - 25),
             duration: Math.random() * 3 + 2,
@@ -1036,33 +1008,47 @@ function initBeyondLogic() {
             yoyo: true,
             ease: 'sine.inOut'
         });
+        particleTweens.push(tw);
     }
 
-    // Title 3D Effect on Mouse Move
-    section.addEventListener('mousemove', (e) => {
-        if (!title) return;
-
-        const xPos = (e.clientX / window.innerWidth - 0.5) * 40;
-        const yPos = (e.clientY / window.innerHeight - 0.5) * 40;
-
-        gsap.to(title, {
-            rotationY: xPos,
-            rotationX: -yPos,
-            duration: 1,
-            ease: 'power2.out'
-        });
+    // Pause particle tweens when section is off-screen
+    ScrollTrigger.create({
+        trigger: section,
+        start: 'top bottom',
+        end: 'bottom top',
+        onEnter: () => particleTweens.forEach(t => t.play()),
+        onLeave: () => particleTweens.forEach(t => t.pause()),
+        onEnterBack: () => particleTweens.forEach(t => t.play()),
+        onLeaveBack: () => particleTweens.forEach(t => t.pause()),
     });
 
-    // Reset on leave
-    section.addEventListener('mouseleave', () => {
-        if (!title) return;
-        gsap.to(title, {
-            rotationY: 0,
-            rotationX: 0,
-            duration: 1,
-            ease: 'power2.out'
+    // Title 3D Effect on Mouse Move (desktop only)
+    if (window.matchMedia('(hover: hover)').matches) {
+        section.addEventListener('mousemove', (e) => {
+            if (!title) return;
+
+            const xPos = (e.clientX / window.innerWidth - 0.5) * 40;
+            const yPos = (e.clientY / window.innerHeight - 0.5) * 40;
+
+            gsap.to(title, {
+                rotationY: xPos,
+                rotationX: -yPos,
+                duration: 1,
+                ease: 'power2.out'
+            });
         });
-    });
+
+        // Reset on leave
+        section.addEventListener('mouseleave', () => {
+            if (!title) return;
+            gsap.to(title, {
+                rotationY: 0,
+                rotationX: 0,
+                duration: 1,
+                ease: 'power2.out'
+            });
+        });
+    }
 }
 
 /* ========================================
@@ -2477,33 +2463,35 @@ function initAboutTextReveal() {
     const aboutText = document.getElementById('about-text');
     if (!aboutText) return;
 
-    const text = aboutText.textContent.trim();
-    const words = text.split(/\s+/);
+    // Split text into word spans
+    const rawWords = aboutText.textContent.trim().split(/\s+/);
+    aboutText.innerHTML = rawWords
+        .map(w => `<span class="word">${w}</span>`)
+        .join(' ');
 
-    aboutText.innerHTML = words.map(word =>
-        `<span class="word">${word}</span>`
-    ).join(' ');
+    const words = aboutText.querySelectorAll('.word');
 
-    const wordEls = aboutText.querySelectorAll('.word');
+    // Set every word to dim grey immediately — GSAP owns all state from here
+    gsap.set(words, { color: 'rgba(255,255,255,0.14)' });
 
-    ScrollTrigger.create({
-        trigger: aboutText,
-        start: 'top 80%',
-        end: 'bottom 30%',
-        scrub: 0.5,
-        onUpdate: (self) => {
-            const progress = self.progress;
-            const totalWords = wordEls.length;
-            const highlightCount = Math.floor(progress * totalWords);
-
-            wordEls.forEach((word, i) => {
-                if (i <= highlightCount) {
-                    word.classList.add('highlighted');
-                } else {
-                    word.classList.remove('highlighted');
-                }
-            });
+    // Build a sequenced timeline: each word illuminates in order.
+    // With scrub, GSAP interpolates the playhead smoothly — no CSS transitions
+    // needed and no onUpdate classList thrash.
+    const tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: aboutText,
+            start: 'top 78%',
+            end: 'bottom 28%',
+            scrub: 1.2,   // lag in seconds — keeps motion smooth on fast scrolls
         }
+    });
+
+    words.forEach((word, i) => {
+        tl.to(
+            word,
+            { color: '#ffffff', ease: 'power1.inOut', duration: 0.35 },
+            i * 0.12  // stagger each word 0.12 timeline-units apart
+        );
     });
 }
 
@@ -2777,27 +2765,172 @@ function initServicesSection() {
             panels.forEach(p => p.classList.remove('active'));
             if (targetPanel) {
                 targetPanel.classList.add('active');
-                const cards = targetPanel.querySelectorAll('.svc-card');
-                gsap.fromTo(cards,
-                    { opacity: 0, y: 30 },
-                    { opacity: 1, y: 0, duration: 0.6, stagger: 0.07, ease: 'power3.out' }
-                );
+                if (window.innerWidth > 600) {
+                    // Desktop: hide first (since CSS no longer does it), then stagger-reveal
+                    const cards = targetPanel.querySelectorAll('.svc-card');
+                    gsap.set(cards, { opacity: 0, y: 30 });
+                    gsap.to(cards, {
+                        opacity: 1, y: 0, duration: 0.6, stagger: 0.07, ease: 'power3.out'
+                    });
+                } else {
+                    // Mobile: reset carousel to card 0 on tab switch
+                    const carr = targetPanel._carousel;
+                    if (carr) carr.goTo(0, false);
+                }
             }
         });
     });
 
-    // ── Initial card reveal ────────────────────────────────
-    ScrollTrigger.create({
-        trigger: '.sv-grid',
-        start: 'top 80%',
-        once: true,
-        onEnter: () => {
-            const activeCards = document.querySelectorAll('.sv-panel.active .svc-card');
-            gsap.fromTo(activeCards,
-                { opacity: 0, y: 40 },
-                { opacity: 1, y: 0, duration: 0.7, stagger: 0.1, ease: 'power3.out' }
-            );
+    // ── Initial card reveal (desktop) ────────────────────
+    if (window.innerWidth > 600) {
+        const activeCards = Array.from(
+            document.querySelectorAll('.sv-panel.active .svc-card')
+        );
+        if (activeCards.length) {
+            // Hide cards immediately via GSAP (not CSS) so the
+            // safety-net below can override when already in view
+            gsap.set(activeCards, { opacity: 0, y: 40 });
+
+            const grid = document.querySelector('.sv-panel.active');
+            const gridRect = grid ? grid.getBoundingClientRect() : null;
+            const alreadyVisible = gridRect && gridRect.top < window.innerHeight * 0.88;
+
+            if (alreadyVisible) {
+                // Section is already on-screen (e.g. page refreshed mid-scroll)
+                // → play the reveal immediately, no ScrollTrigger needed
+                gsap.to(activeCards, {
+                    opacity: 1, y: 0,
+                    duration: 0.7, stagger: 0.08, ease: 'power3.out'
+                });
+            } else {
+                // Normal case: animate when section scrolls into view.
+                // Using inline scrollTrigger on the tween (not ScrollTrigger.create)
+                // is more reliable — GSAP handles boundary edge-cases internally.
+                gsap.to(activeCards, {
+                    opacity: 1, y: 0,
+                    duration: 0.7, stagger: 0.08, ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: '.sv-panel.active',
+                        start: 'top 88%',
+                        once: true,
+                        invalidateOnRefresh: true
+                    }
+                });
+            }
         }
+    }
+
+    // ── Mobile carousel ───────────────────────────────────
+    function buildCarousel(panel) {
+        const wrap   = panel.querySelector('.sv-carousel-wrap');
+        const track  = panel.querySelector('.sv-grid');
+        const dotsEl = panel.querySelector('.sv-dots');
+        const prevBtn = panel.querySelector('.sv-carr-prev');
+        const nextBtn = panel.querySelector('.sv-carr-next');
+        const cards  = Array.from(panel.querySelectorAll('.svc-card'));
+        if (!wrap || !track || !cards.length) return;
+
+        let current = 0;
+        const total = cards.length;
+
+        // Build dots
+        dotsEl.innerHTML = '';
+        cards.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.className = 'sv-dot' + (i === 0 ? ' active' : '');
+            dot.setAttribute('aria-label', 'Go to service ' + (i + 1));
+            dot.addEventListener('click', () => goTo(i));
+            dotsEl.appendChild(dot);
+        });
+
+        function getCardWidth() {
+            return cards[0] ? cards[0].getBoundingClientRect().width : 0;
+        }
+
+        function updateButtons() {
+            if (prevBtn) prevBtn.disabled = current === 0;
+            if (nextBtn) nextBtn.disabled = current === total - 1;
+        }
+
+        function goTo(index, animate = true) {
+            current = Math.max(0, Math.min(total - 1, index));
+            const cardW = getCardWidth();
+            const offset = -(current * cardW);
+            if (animate) {
+                gsap.to(track, { x: offset, duration: 0.5, ease: 'power3.inOut' });
+            } else {
+                gsap.set(track, { x: offset });
+            }
+            dotsEl.querySelectorAll('.sv-dot').forEach((d, i) => {
+                d.classList.toggle('active', i === current);
+            });
+            updateButtons();
+        }
+
+        prevBtn && prevBtn.addEventListener('click', () => goTo(current - 1));
+        nextBtn && nextBtn.addEventListener('click', () => goTo(current + 1));
+
+        // Touch / swipe
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let isDragging  = false;
+
+        track.addEventListener('touchstart', e => {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+            isDragging = true;
+        }, { passive: true });
+
+        track.addEventListener('touchend', e => {
+            if (!isDragging) return;
+            isDragging = false;
+            const dx = touchStartX - e.changedTouches[0].clientX;
+            const dy = touchStartY - e.changedTouches[0].clientY;
+            if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+                dx > 0 ? goTo(current + 1) : goTo(current - 1);
+            }
+        }, { passive: true });
+
+        // Reset position on window resize (desktop / rotate)
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 600) {
+                gsap.set(track, { x: 0 });
+            } else {
+                goTo(current, false);
+            }
+        });
+
+        // Peek hint animation on first entry into viewport
+        ScrollTrigger.create({
+            trigger: wrap,
+            start: 'top 85%',
+            once: true,
+            onEnter: () => {
+                if (window.innerWidth > 600) return;
+                wrap.classList.add('sv-hint');
+                setTimeout(() => wrap.classList.remove('sv-hint'), 900);
+            }
+        });
+
+        updateButtons();
+        panel._carousel = { goTo };
+    }
+
+    // Only initialise carousels if on mobile; re-init on resize if needed
+    function initCarousels() {
+        if (window.innerWidth <= 600) {
+            panels.forEach(panel => {
+                if (!panel._carousel) buildCarousel(panel);
+            });
+        }
+    }
+
+    initCarousels();
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(initCarousels, 200);
     });
 }
 
@@ -2856,11 +2989,17 @@ function initGlobeCanvas() {
     let mouseRX = 0, mouseRY = 0;
     let targetRX = 0, targetRY = 0;
     let animRunning = false;
+    let globeMovePending = false;
 
     wrap.addEventListener('mousemove', (e) => {
-        const r = wrap.getBoundingClientRect();
-        targetRX = ((e.clientY - r.top)  / r.height - 0.5) * 0.6;
-        targetRY = ((e.clientX - r.left) / r.width  - 0.5) * 0.8;
+        if (globeMovePending) return;
+        globeMovePending = true;
+        requestAnimationFrame(() => {
+            const r = wrap.getBoundingClientRect();
+            targetRX = ((e.clientY - r.top)  / r.height - 0.5) * 0.6;
+            targetRY = ((e.clientX - r.left) / r.width  - 0.5) * 0.8;
+            globeMovePending = false;
+        });
     });
     wrap.addEventListener('mouseleave', () => { targetRX = 0; targetRY = 0; });
 
@@ -3044,15 +3183,220 @@ function initWorkShowcase() {
 
     // Card tilt + y-lift (GSAP owns transform, CSS hover disabled)
     cards.forEach(card => {
+        let cardMovePending = false;
         card.addEventListener('mousemove', (e) => {
             if (window.innerWidth < 900) return;
-            const rect = card.getBoundingClientRect();
-            const x    = (e.clientX - rect.left) / rect.width  - 0.5;
-            const y    = (e.clientY - rect.top)  / rect.height - 0.5;
-            gsap.to(card, { rotateX: -y * 8, rotateY: x * 8, y: -6, transformPerspective: 700, duration: 0.4, ease: 'power2.out' });
+            if (cardMovePending) return;
+            cardMovePending = true;
+            requestAnimationFrame(() => {
+                const rect = card.getBoundingClientRect();
+                const x    = (e.clientX - rect.left) / rect.width  - 0.5;
+                const y    = (e.clientY - rect.top)  / rect.height - 0.5;
+                gsap.to(card, { rotateX: -y * 8, rotateY: x * 8, y: -6, transformPerspective: 700, duration: 0.4, ease: 'power2.out' });
+                cardMovePending = false;
+            });
         });
         card.addEventListener('mouseleave', () => {
             gsap.to(card, { rotateX: 0, rotateY: 0, y: 0, duration: 0.7, ease: 'elastic.out(1,0.5)' });
+        });
+    });
+
+    // ── PERFORMANCE: lazy-load ambient iframes only when grid approaches ──
+    // rootMargin 400px means iframes start loading 400px before visible
+    const ambientObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const frame = entry.target;
+            if (frame.dataset.src) {
+                frame.src = frame.dataset.src;
+                // fade in once Vimeo fires the load event
+                // also add a timeout fallback (some browsers don't fire load on cross-origin iframes)
+                const markLoaded = () => frame.classList.add('vi-loaded');
+                frame.addEventListener('load', markLoaded, { once: true });
+                setTimeout(markLoaded, 4000); // fallback: fade in after 4 s regardless
+            }
+            ambientObserver.unobserve(frame);
+        });
+    }, { rootMargin: '200px 0px' }); // start loading before card is visible
+
+    // Skip ambient iframe loading entirely on touch/mobile — too heavy (3 concurrent Vimeo players)
+    const isTouchDevice = window.matchMedia('(hover: none)').matches;
+    if (!isTouchDevice) {
+        document.querySelectorAll('.wsc-vimeo-frame').forEach(f => ambientObserver.observe(f));
+    }
+
+    // ── Vimeo oEmbed thumbnail fetch — lazy, fires when grid enters viewport ──
+    // No img tags / 3rd-party CDN: we hit Vimeo's own CORS-enabled oEmbed endpoint
+    // Also caches video dimensions for lightbox aspect-ratio detection
+    const vimeoAspectCache = new Map();
+
+    async function fetchVimeoThumb(el, videoId) {
+        try {
+            const res = await fetch(
+                `https://vimeo.com/api/oembed.json?url=https%3A%2F%2Fvimeo.com%2F${videoId}&width=1280`,
+                { mode: 'cors' }
+            );
+            if (!res.ok) return;
+            const data = await res.json();
+
+            // Cache video dimensions for lightbox aspect-ratio
+            if (data.width && data.height) {
+                vimeoAspectCache.set(videoId, { w: data.width, h: data.height });
+            }
+
+            let thumbUrl = data.thumbnail_url || '';
+            // Vimeo returns e.g. "…_640.jpg" — bump to 1280 for crisp displays
+            thumbUrl = thumbUrl.replace(/_\d+(\.\w+)$/, '_1280$1');
+            if (!thumbUrl) return;
+            // pre-load the image in memory so the reveal is instant
+            const img = new Image();
+            img.onload = () => {
+                el.style.backgroundImage = `url('${thumbUrl}')`;
+                // force a reflow so the animation triggers cleanly
+                void el.offsetHeight;
+                el.classList.add('vi-thumb-loaded');
+            };
+            img.onerror = () => { /* keep gradient fallback silently */ };
+            img.src = thumbUrl;
+        } catch (_) { /* keep gradient fallback silently */ }
+    }
+
+    // Also pre-fetch oEmbed for ambient cards (they don't have thumbnails but need aspect data)
+    async function prefetchVimeoAspect(videoId) {
+        if (vimeoAspectCache.has(videoId)) return;
+        try {
+            const res = await fetch(
+                `https://vimeo.com/api/oembed.json?url=https%3A%2F%2Fvimeo.com%2F${videoId}&width=640`,
+                { mode: 'cors' }
+            );
+            if (!res.ok) return;
+            const data = await res.json();
+            if (data.width && data.height) {
+                vimeoAspectCache.set(videoId, { w: data.width, h: data.height });
+            }
+        } catch (_) { /* silent */ }
+    }
+
+    // Trigger all thumb fetches + aspect prefetches once the grid scrolls into range
+    const thumbTriggerObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            // Thumbnails for play cards
+            document.querySelectorAll('.wsc-thumb-bg[data-vimeo-id]').forEach(el => {
+                fetchVimeoThumb(el, el.dataset.vimeoId);
+            });
+            // Aspect-ratio prefetch for ambient cards (no thumbnail needed, just dimensions)
+            document.querySelectorAll('.ws-card--ambient[data-vimeo-id]').forEach(card => {
+                prefetchVimeoAspect(card.dataset.vimeoId);
+            });
+            thumbTriggerObserver.disconnect(); // fire once
+        });
+    }, { rootMargin: '300px 0px' });
+
+    const wsGrid = document.getElementById('wsGrid');
+    if (wsGrid) thumbTriggerObserver.observe(wsGrid);
+
+    // ── Ambient cards: click opens full lightbox (not bg mode) ──
+    // ── Vimeo Lightbox ────────────────────────────────────────────────────
+    const lightbox    = document.getElementById('vimeoLightbox');
+    const vlbIframe   = document.getElementById('vlbIframe');
+    const vlbClose    = document.getElementById('vlbClose');
+    const vlbBackdrop = document.getElementById('vlbBackdrop');
+
+    if (!lightbox || !vlbIframe) return; // guard: elements must exist
+
+    const vlbFrameWrap = lightbox.querySelector('.vlb-frame-wrap');
+    let vlbCloseTimer = null; // tracks the delayed src-clear so rapid open/close doesn't race
+
+    function applyLightboxAspect(w, h) {
+        if (!vlbFrameWrap) return;
+        const isPortrait = h > w;
+        vlbFrameWrap.classList.toggle('vlb-portrait', isPortrait);
+        vlbFrameWrap.classList.toggle('vlb-landscape', !isPortrait);
+        vlbFrameWrap.style.aspectRatio = `${w} / ${h}`;
+    }
+
+    function openLightbox(videoId) {
+        if (!videoId) return;
+        // Cancel any pending close-timer (prevents race if user re-opens quickly)
+        if (vlbCloseTimer) { clearTimeout(vlbCloseTimer); vlbCloseTimer = null; }
+
+        // Reset aspect to default 16:9 before each open
+        vlbFrameWrap.classList.remove('vlb-portrait', 'vlb-landscape');
+        vlbFrameWrap.style.aspectRatio = '';
+
+        // Apply cached aspect ratio instantly; if not cached, fetch and apply
+        const cached = vimeoAspectCache.get(videoId);
+        if (cached) {
+            applyLightboxAspect(cached.w, cached.h);
+        } else {
+            prefetchVimeoAspect(videoId).then(() => {
+                const data = vimeoAspectCache.get(videoId);
+                if (data) applyLightboxAspect(data.w, data.h);
+            });
+        }
+
+        // loop=1    → loops instead of showing Vimeo end-screen recommendations
+        // rel=0     → suppress related videos shown at end (Vimeo Pro)
+        // transparent=0 → force black bg, hides Vimeo watermark area
+        // pip=0     → disable picture-in-picture button
+        // color=fe6e00 → brand accent on progress bar
+        vlbIframe.src = [
+            `https://player.vimeo.com/video/${videoId}`,
+            '?autoplay=1&loop=1&rel=0',
+            '&color=fe6e00&byline=0&title=0&portrait=0',
+            '&transparent=0&pip=0&dnt=1'
+        ].join('');
+        lightbox.setAttribute('aria-hidden', 'false');
+        lightbox.classList.add('vlb-open');
+        document.body.style.overflow = 'hidden';
+        if (window.lenis) window.lenis.stop(); // freeze Lenis virtual scroll
+        requestAnimationFrame(() => vlbClose.focus());
+    }
+
+    function closeLightbox() {
+        if (!lightbox.classList.contains('vlb-open')) return; // prevent double-close
+        document.body.style.overflow = '';
+        if (window.lenis) window.lenis.start(); // resume Lenis virtual scroll
+        lightbox.classList.remove('vlb-open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        // clear src AFTER fade transition so audio stops cleanly
+        vlbCloseTimer = setTimeout(() => {
+            if (vlbIframe) vlbIframe.src = '';
+            vlbCloseTimer = null;
+        }, 450);
+    }
+
+    vlbClose.addEventListener('click', closeLightbox);
+    vlbBackdrop.addEventListener('click', closeLightbox);
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeLightbox();
+    });
+
+    // Ambient cards — click anywhere on card opens lightbox
+    document.querySelectorAll('.ws-card--ambient[data-vimeo-id]').forEach(card => {
+        card.addEventListener('click', (e) => {
+            // don't open if user clicked wsc-watch-btn (it fires its own handler below)
+            if (e.target.closest('.wsc-watch-btn')) return;
+            openLightbox(card.dataset.vimeoId);
+        });
+    });
+
+    // Watch-full button on ambient cards
+    document.querySelectorAll('.wsc-watch-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const card = btn.closest('[data-vimeo-id]');
+            if (card) openLightbox(card.dataset.vimeoId);
+        });
+    });
+
+    // Play-button cards — stopPropagation prevents card-click from also firing
+    document.querySelectorAll('.wsc-play-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            openLightbox(btn.dataset.vimeoId);
         });
     });
 }
@@ -3117,46 +3461,69 @@ function initPricingSection() {
 
 
 /* ════════════════════════════════════════════════════════════
+   FOOTER BRAND SPOTLIGHT
+════════════════════════════════════════════════════════════ */
+function initFooterSpotlight() {
+    const el = document.querySelector('.footer-brand-text');
+    if (!el) return;
+
+    /* Move both gradient layers to follow the cursor (throttled) */
+    let footerMovePending = false;
+    el.addEventListener('mousemove', function (e) {
+        if (footerMovePending) return;
+        footerMovePending = true;
+        requestAnimationFrame(() => {
+            const rect = el.getBoundingClientRect();
+            el.style.setProperty('--x', (e.clientX - rect.left) + 'px');
+            el.style.setProperty('--y', (e.clientY - rect.top)  + 'px');
+            footerMovePending = false;
+        });
+    });
+
+    /* Push gradients off-screen so text goes invisible when not hovering */
+    el.addEventListener('mouseleave', function () {
+        el.style.setProperty('--x', '-9999px');
+        el.style.setProperty('--y', '-9999px');
+    });
+
+    /* Scroll-reveal */
+    gsap.from(el, {
+        opacity: 0,
+        y: 60,
+        duration: 1.4,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 95%', once: true }
+    });
+}
+
+
+/* ════════════════════════════════════════════════════════════
    CONTACT SECTION — Cinematic Reveal + Channel Stagger
 ════════════════════════════════════════════════════════════ */
 function initContactAnimations() {
-    /* ── header reveals ── */
-    gsap.to('.cs-eyebrow', {
-        opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
-        scrollTrigger: { trigger: '.contact-section', start: 'top 70%', once: true }
-    });
-    gsap.to('.cs-title-word', {
-        y: '0%', duration: 1.2, stagger: 0.15, ease: 'expo.out',
-        scrollTrigger: { trigger: '.contact-section', start: 'top 65%', once: true }
-    });
-    gsap.to('.cs-sub', {
-        opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', delay: 0.4,
-        scrollTrigger: { trigger: '.contact-section', start: 'top 65%', once: true }
-    });
+    const st = { trigger: '.contact-section', start: 'top 72%', once: true };
+    const stBody = { trigger: '.cs-body', start: 'top 80%', once: true };
+
+    /* ── header ── */
+    gsap.to('.cs-eyebrow', { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', scrollTrigger: st });
+    gsap.to('.cs-title-word', { y: '0%', duration: 1.3, stagger: 0.14, ease: 'expo.out', scrollTrigger: { trigger: '.contact-section', start: 'top 68%', once: true } });
+    gsap.to('.cs-header-rule', { opacity: 1, duration: 1, ease: 'power3.out', delay: 0.55, scrollTrigger: st });
 
     /* ── left column ── */
-    gsap.to('.cs-avail-badge', {
-        opacity: 1, y: 0, duration: 0.7, ease: 'power3.out',
-        scrollTrigger: { trigger: '.cs-body', start: 'top 82%', once: true }
-    });
-    gsap.to('.cs-channel', {
-        opacity: 1, x: 0, duration: 0.65, stagger: 0.12, ease: 'power3.out', delay: 0.15,
-        scrollTrigger: { trigger: '.cs-channels', start: 'top 85%', once: true }
-    });
+    gsap.to('.cs-avail-badge', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', scrollTrigger: stBody });
+    gsap.to('.cs-statement', { opacity: 1, y: 0, duration: 0.75, ease: 'power3.out', delay: 0.1, scrollTrigger: stBody });
+    gsap.to('.cs-stats-row', { opacity: 1, y: 0, duration: 0.75, ease: 'power3.out', delay: 0.2, scrollTrigger: stBody });
+    gsap.to('.cs-channel', { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out', delay: 0.3, scrollTrigger: stBody });
 
-    /* ── right column (form card) ── */
-    gsap.to('.cs-right', {
-        opacity: 1, y: 0, duration: 0.85, ease: 'power3.out', delay: 0.25,
-        scrollTrigger: { trigger: '.cs-body', start: 'top 82%', once: true }
-    });
+    /* ── right column ── */
+    gsap.to('.cs-form-eyebrow', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', delay: 0.15, scrollTrigger: stBody });
+    gsap.to('.cs-form-sub', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', delay: 0.25, scrollTrigger: stBody });
+    gsap.to('.cs-right', { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', delay: 0.1, scrollTrigger: stBody });
 
     /* ── footer bar ── */
-    gsap.to('.cs-footer-bar', {
-        opacity: 1, duration: 1, ease: 'power3.out',
-        scrollTrigger: { trigger: '.cs-footer-bar', start: 'top 92%', once: true }
-    });
+    gsap.to('.cs-footer-bar', { opacity: 1, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '.cs-footer-bar', start: 'top 92%', once: true } });
 
-    /* ── Contact form submission ── */
+    /* ── Form submission ── */
     const form    = document.getElementById('csForm');
     const success = document.getElementById('csFormSuccess');
     if (!form || !success) return;
@@ -3167,27 +3534,43 @@ function initContactAnimations() {
     form.addEventListener('submit', function (e) {
         e.preventDefault();
 
-        /* Basic validation */
         const name  = form.querySelector('#cf-name').value.trim();
         const email = form.querySelector('#cf-email').value.trim();
         const msg   = form.querySelector('#cf-msg').value.trim();
-        if (!name || !email || !msg) return;
+        if (!name || !email || !msg) {
+            /* Shake the missing fields */
+            [form.querySelector('#cf-name'), form.querySelector('#cf-email'), form.querySelector('#cf-msg')].forEach(el => {
+                if (!el.value.trim()) gsap.fromTo(el, { x: -6 }, { x: 0, duration: 0.4, ease: 'elastic.out(1.2,0.4)' });
+            });
+            return;
+        }
 
-        /* Loading state */
+        /* Validate email format */
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            const emailEl = form.querySelector('#cf-email');
+            gsap.fromTo(emailEl, { x: -6 }, { x: 0, duration: 0.45, ease: 'elastic.out(1.2,0.4)' });
+            emailEl.focus();
+            emailEl.setAttribute('aria-invalid', 'true');
+            emailEl.closest('.cs-field')?.classList.add('cs-field--error');
+            setTimeout(() => emailEl.setAttribute('aria-invalid', 'false'), 2500);
+            return;
+        }
+        form.querySelector('#cf-email')?.closest('.cs-field')?.classList.remove('cs-field--error');
+
         if (btn)     btn.disabled = true;
         if (btnText) btnText.textContent = 'Sending…';
 
-        /* Simulate send — swap for Formspree / EmailJS in production */
+        /* Swap for Formspree / EmailJS / backend in production */
         setTimeout(() => {
-            /* Hide fields, show success */
-            Array.from(form.elements).forEach(el => {
-                if (el !== btn) el.style.opacity = '0';
+            gsap.to(form.querySelectorAll('.cs-field, .cs-form__row, .cs-form__footer'), {
+                opacity: 0, y: -8, duration: 0.35, stagger: 0.05, ease: 'power2.in',
+                onComplete: () => {
+                    form.querySelectorAll('.cs-field, .cs-form__row, .cs-form__footer').forEach(el => el.style.display = 'none');
+                    success.removeAttribute('hidden');
+                    gsap.from(success, { opacity: 0, y: 12, duration: 0.55, ease: 'power3.out' });
+                }
             });
-            btn.style.display = 'none';
-
-            success.removeAttribute('hidden');
-            gsap.from(success, { opacity: 0, y: 10, duration: 0.5, ease: 'power3.out' });
-
             form.reset();
         }, 900);
     });
@@ -3201,11 +3584,12 @@ function initFlowingServices() {
     const rows = document.querySelectorAll('.fs-row');
     if (!rows.length) return;
 
-    // Scroll-reveal for the section header
-    gsap.from('.flowing-services .section-label', {
-        opacity: 0, y: 20, duration: 0.8, ease: 'power3.out',
-        scrollTrigger: { trigger: '.flowing-services', start: 'top 80%', once: true }
-    });
+    // Scroll-reveal for the hint strip + section header
+    gsap.fromTo('.fs-hint-bar',
+        { opacity: 0, y: 14 },
+        { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out',
+          scrollTrigger: { trigger: '.flowing-services', start: 'top 82%', once: true }
+        });
 
     // Stagger reveal each row
     gsap.from(rows, {
@@ -3480,12 +3864,18 @@ function initMagicBentoSpotlight() {
             el.style.position = 'relative';
             el.style.overflow = 'hidden';
 
+            let bentoMovePending = false;
             el.addEventListener('mousemove', e => {
-                const rect = el.getBoundingClientRect();
-                const x = ((e.clientX - rect.left) / rect.width  * 100).toFixed(1) + '%';
-                const y = ((e.clientY - rect.top)  / rect.height * 100).toFixed(1) + '%';
-                el.style.setProperty('--sx', x);
-                el.style.setProperty('--sy', y);
+                if (bentoMovePending) return;
+                bentoMovePending = true;
+                requestAnimationFrame(() => {
+                    const rect = el.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width  * 100).toFixed(1) + '%';
+                    const y = ((e.clientY - rect.top)  / rect.height * 100).toFixed(1) + '%';
+                    el.style.setProperty('--sx', x);
+                    el.style.setProperty('--sy', y);
+                    bentoMovePending = false;
+                });
             });
 
             // Spark burst on enter
@@ -3575,4 +3965,42 @@ function initTargetCursor() {
             if (hovered) showBrackets(hovered);
         }
     }, { passive: true });
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   PAUSE OFF-SCREEN CSS ANIMATIONS — saves GPU/CPU on mobile
+════════════════════════════════════════════════════════════ */
+function initPauseOffscreenAnimations() {
+    // Elements with infinite CSS animations that should pause off-screen
+    const selectors = [
+        '.h-marquee__track',
+        '.h-bg__mesh',
+        '.h-logo-glow',
+        '.h-logo-img',
+        '.h-tag__dot',
+        '.h-scroll__wheel',
+        '.beyond-orb',
+        '.floating-orb',
+        '.gradient-mesh',
+        '.trusted-track',
+        '.globe-glow-core',
+        '.spotlight-beam',
+        '.lamp-glow',
+        '.aurora-gradient',
+        '.dot-background',
+        '.fs-arrow',
+        '.wsc-live-dot',
+        '.wsc-motion-lines div'
+    ];
+    const allEls = document.querySelectorAll(selectors.join(','));
+    if (!allEls.length) return;
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            entry.target.style.animationPlayState = entry.isIntersecting ? 'running' : 'paused';
+        });
+    }, { rootMargin: '100px 0px' });
+
+    allEls.forEach(el => observer.observe(el));
 }

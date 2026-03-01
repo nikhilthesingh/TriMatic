@@ -4,16 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tri Matic</title>
+    <title>Tri Matic |Creative Video & Design Studio</title>
     <meta name="description"
         content="Tri Matic is a creative digital studio crafting immersive, interaction-driven websites and digital experiences.">
+
+    <!-- Favicon — TM rendered in Blanka Regular via Chrome headless, 96×96 PNG -->
+    <link rel="icon" href="assets/favicon.png" type="image/png" sizes="96x96">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="assets/favicon.png">
+
+    <!-- Browser / OS theme colors -->
+    <meta name="theme-color" content="#fe6e00">
+    <meta name="msapplication-TileColor" content="#050505">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <!-- Vimeo — preconnect so player iframes start handshake before scroll -->
+    <link rel="preconnect" href="https://player.vimeo.com" crossorigin>
+    <link rel="preconnect" href="https://i.vimeocdn.com" crossorigin>
+    <link rel="dns-prefetch" href="https://f.vimeocdn.com">
+    <link rel="dns-prefetch" href="https://fresnel.vimeocdn.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Oswald:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
         rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/blanka" rel="stylesheet">
 
     <!-- Styles -->
     <link rel="stylesheet" href="css/styles.css">
@@ -215,6 +232,9 @@
 
         <!-- Trusted By Section -->
         <section class="trusted-by" id="trusted-by">
+            <!-- Decorative logo ghosts -->
+            <div class="tb-deco tb-deco--left" aria-hidden="true"><img src="assets/TriMatic.webp" alt="" loading="lazy"></div>
+            <div class="tb-deco tb-deco--right" aria-hidden="true"><img src="assets/TriMatic.webp" alt="" loading="lazy"></div>
             <div class="container">
                 <span class="trusted-label">Trusted By Creators & Brands</span>
             </div>
@@ -368,6 +388,7 @@
 
                 <!-- VIDEO EDITING PANEL -->
                 <div class="sv-panel active" id="panel-video">
+                    <div class="sv-carousel-wrap">
                     <div class="sv-grid">
 
                         <div class="svc-card" data-index="01">
@@ -473,10 +494,21 @@
                         </div>
 
                     </div><!-- /sv-grid -->
+                    <div class="sv-carousel-ui">
+                        <button class="sv-carr-btn sv-carr-prev" aria-label="Previous service">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                        </button>
+                        <div class="sv-dots"></div>
+                        <button class="sv-carr-btn sv-carr-next" aria-label="Next service">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                        </button>
+                    </div>
+                    </div><!-- /sv-carousel-wrap -->
                 </div><!-- /PANEL VIDEO -->
 
                 <!-- GRAPHIC DESIGN PANEL -->
                 <div class="sv-panel" id="panel-design">
+                    <div class="sv-carousel-wrap">
                     <div class="sv-grid">
 
                         <div class="svc-card" data-index="01">
@@ -582,6 +614,16 @@
                         </div>
 
                     </div><!-- /sv-grid -->
+                    <div class="sv-carousel-ui">
+                        <button class="sv-carr-btn sv-carr-prev" aria-label="Previous service">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                        </button>
+                        <div class="sv-dots"></div>
+                        <button class="sv-carr-btn sv-carr-next" aria-label="Next service">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                        </button>
+                    </div>
+                    </div><!-- /sv-carousel-wrap -->
                 </div><!-- /PANEL DESIGN -->
 
             </div><!-- /services-inner -->
@@ -593,11 +635,22 @@
         ═══════════════════════════════════════ -->
         <section class="flowing-services" id="flowing-services" aria-label="Services Overview">
 
+            <!-- Interactivity hint strip -->
+            <div class="fs-hint-bar" aria-hidden="true">
+                <span class="fs-hint-label" style = "color: chocolate;"><b>3.5</b> &middot; <b>Services Overview</b></span>
+                <span class="fs-hint-cta">
+                    <svg class="fs-hint-icon" width="12" height="17" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="0.75" y="0.75" width="10.5" height="16.5" rx="5.25" stroke="currentColor" stroke-width="1.9"/><line x1="6" y1="4" x2="6" y2="7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    <span class="fs-ht-d"><b>Hover each row</b></span>
+                    <span class="fs-ht-m">Tap each row</span>
+                </span>
+            </div>
+
             <div class="fs-row" tabindex="0">
                 <div class="fs-row-content">
                     <span class="fs-num">01</span>
                     <h3 class="fs-title">Short Form Video</h3>
                     <span class="fs-meta">Reels &middot; Shorts &middot; TikTok</span>
+                    <span class="fs-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
                 </div>
                 <div class="fs-fill" aria-hidden="true">
                     <div class="fs-marquee"><span>SHORT FORM VIDEO ✦ REELS ✦ YOUTUBE SHORTS ✦ TIKTOK ✦ INSTAGRAM ✦ VIRAL EDITS ✦ </span><span>SHORT FORM VIDEO ✦ REELS ✦ YOUTUBE SHORTS ✦ TIKTOK ✦ INSTAGRAM ✦ VIRAL EDITS ✦ </span></div>
@@ -609,6 +662,7 @@
                     <span class="fs-num">02</span>
                     <h3 class="fs-title">Cinematic Edits</h3>
                     <span class="fs-meta">Long Form &middot; Brand Films</span>
+                    <span class="fs-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
                 </div>
                 <div class="fs-fill" aria-hidden="true">
                     <div class="fs-marquee"><span>CINEMATIC EDITS ✦ LONG FORM ✦ BRAND FILMS ✦ DOCUMENTARIES ✦ COLOR GRADE ✦ STORYTELLING ✦ </span><span>CINEMATIC EDITS ✦ LONG FORM ✦ BRAND FILMS ✦ DOCUMENTARIES ✦ COLOR GRADE ✦ STORYTELLING ✦ </span></div>
@@ -620,6 +674,7 @@
                     <span class="fs-num">03</span>
                     <h3 class="fs-title">Phonk Edits</h3>
                     <span class="fs-meta">Aggressive Cuts &middot; Viral</span>
+                    <span class="fs-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
                 </div>
                 <div class="fs-fill" aria-hidden="true">
                     <div class="fs-marquee"><span>PHONK EDITS ✦ AGGRESSIVE CUTS ✦ VIRAL AESTHETICS ✦ TRENDING ✦ HIGH ENERGY ✦ FLASHY ✦ </span><span>PHONK EDITS ✦ AGGRESSIVE CUTS ✦ VIRAL AESTHETICS ✦ TRENDING ✦ HIGH ENERGY ✦ FLASHY ✦ </span></div>
@@ -631,6 +686,7 @@
                     <span class="fs-num">04</span>
                     <h3 class="fs-title">Logo Design</h3>
                     <span class="fs-meta">Brand Mark &middot; Identity</span>
+                    <span class="fs-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
                 </div>
                 <div class="fs-fill" aria-hidden="true">
                     <div class="fs-marquee"><span>LOGO DESIGN ✦ BRAND MARK ✦ WORDMARK ✦ MONOGRAM ✦ ICON DESIGN ✦ IDENTITY ✦ </span><span>LOGO DESIGN ✦ BRAND MARK ✦ WORDMARK ✦ MONOGRAM ✦ ICON DESIGN ✦ IDENTITY ✦ </span></div>
@@ -642,6 +698,7 @@
                     <span class="fs-num">05</span>
                     <h3 class="fs-title">Social Graphics</h3>
                     <span class="fs-meta">Instagram &middot; Thumbnails</span>
+                    <span class="fs-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
                 </div>
                 <div class="fs-fill" aria-hidden="true">
                     <div class="fs-marquee"><span>SOCIAL GRAPHICS ✦ THUMBNAILS ✦ BANNERS ✦ COVER PAGES ✦ STORIES ✦ POSTS ✦ </span><span>SOCIAL GRAPHICS ✦ THUMBNAILS ✦ BANNERS ✦ COVER PAGES ✦ STORIES ✦ POSTS ✦ </span></div>
@@ -653,6 +710,7 @@
                     <span class="fs-num">06</span>
                     <h3 class="fs-title">Brand Kits</h3>
                     <span class="fs-meta">Style Guides &middot; Materials</span>
+                    <span class="fs-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
                 </div>
                 <div class="fs-fill" aria-hidden="true">
                     <div class="fs-marquee"><span>BRAND KITS ✦ STYLE GUIDES ✦ STATIONERY ✦ MATERIALS ✦ PACKAGING ✦ GUIDELINES ✦ </span><span>BRAND KITS ✦ STYLE GUIDES ✦ STATIONERY ✦ MATERIALS ✦ PACKAGING ✦ GUIDELINES ✦ </span></div>
@@ -877,143 +935,276 @@
                     <button class="wf-btn" data-filter="cinematic">Cinematic</button>
                     <button class="wf-btn" data-filter="phonk">Phonk Edits</button>
                     <button class="wf-btn" data-filter="motion">Motion Design</button>
-                    <button class="wf-btn" data-filter="graphic">Graphic Design</button>
                 </div>
 
-                <!-- Work Grid -->
+                <!-- Work Grid — 7 real Vimeo projects
+                     ambient loop (bg=1 mode, click opens lightbox): cards 1, 3, 6
+                     click-to-play (lightbox pop-up): cards 2, 4, 5, 7
+                     thumbnails: fetched from Vimeo oEmbed API on scroll, gradient fallback until loaded -->
                 <div class="ws-grid" id="wsGrid">
 
-                    <div class="ws-card" data-category="shortform">
-                        <div class="wsc-visual wsc-visual--v1">
+                    <!-- CARD 1 — ambient loop + click lightbox — Short Form -->
+                    <div class="ws-card ws-card--ambient" data-category="shortform" data-vimeo-id="1169202605">
+                        <div class="wsc-visual">
+                            <iframe class="wsc-vimeo-frame"
+                                data-src="https://player.vimeo.com/video/1169202605?background=1&autoplay=1&loop=1&muted=1&quality=360p&byline=0&title=0&portrait=0&dnt=1"
+                                frameborder="0" allow="autoplay; fullscreen; picture-in-picture"
+                                aria-hidden="true"></iframe>
                             <div class="wsc-filmgrain"></div>
                             <div class="wsc-overlay"></div>
-                            <div class="wsc-center-icon">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                            <div class="wsc-ambient-badge" aria-hidden="true">
+                                <span class="wsc-live-dot"></span> LIVE
                             </div>
+                            <button class="wsc-watch-btn" aria-label="Watch full video">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+                                <span>Watch Full</span>
+                            </button>
                         </div>
                         <div class="wsc-info">
                             <span class="wsc-cat">Short Form</span>
-                            <h3 class="wsc-name">Reel Mastery</h3>
+                            <h3 class="wsc-name">The Edit</h3>
                             <p class="wsc-meta">Fast-cut · Trending Audio · Motion Text</p>
                         </div>
-                        <a href="https://bento.me/trimatic" target="_blank" class="wsc-link" aria-label="View Reel Mastery"></a>
                     </div>
 
-                    <div class="ws-card ws-card--tall" data-category="cinematic">
-                        <div class="wsc-visual wsc-visual--v2">
+                    <!-- CARD 2 — click-to-play, TALL — Cinematic hero -->
+                    <div class="ws-card ws-card--tall ws-card--play" data-category="cinematic">
+                        <div class="wsc-visual">
+                            <!-- gradient skeleton, js swaps in real thumb via oEmbed -->
+                            <div class="wsc-thumb-bg wsc-thumb-bg--cinematic" data-vimeo-id="1169194379"></div>
                             <div class="wsc-filmgrain"></div>
                             <div class="wsc-overlay"></div>
-                            <div class="wsc-center-icon">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                            </div>
+                            <button class="wsc-play-btn" data-vimeo-id="1169194379" aria-label="Play Cinematic Edit">
+                                <span class="wsc-play-ring"></span>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+                            </button>
                         </div>
                         <div class="wsc-info">
                             <span class="wsc-cat">Cinematic</span>
-                            <h3 class="wsc-name">Cinema Grade</h3>
+                            <h3 class="wsc-name">Cinema Seq. I</h3>
                             <p class="wsc-meta">LUT Grade · Film Tone · Storytelling</p>
                         </div>
-                        <a href="https://bento.me/trimatic" target="_blank" class="wsc-link" aria-label="View Cinema Grade"></a>
                     </div>
 
-                    <div class="ws-card" data-category="phonk">
-                        <div class="wsc-visual wsc-visual--v3">
+                    <!-- CARD 3 — ambient loop + click lightbox — Short Form -->
+                    <div class="ws-card ws-card--ambient" data-category="shortform" data-vimeo-id="1169194704">
+                        <div class="wsc-visual">
+                            <iframe class="wsc-vimeo-frame"
+                                data-src="https://player.vimeo.com/video/1169194704?background=1&autoplay=1&loop=1&muted=1&quality=360p&byline=0&title=0&portrait=0&dnt=1"
+                                frameborder="0" allow="autoplay; fullscreen; picture-in-picture"
+                                aria-hidden="true"></iframe>
                             <div class="wsc-filmgrain"></div>
                             <div class="wsc-overlay"></div>
-                            <div class="wsc-center-icon">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                            <div class="wsc-ambient-badge" aria-hidden="true">
+                                <span class="wsc-live-dot"></span> LIVE
                             </div>
-                        </div>
-                        <div class="wsc-info">
-                            <span class="wsc-cat">Phonk Edit</span>
-                            <h3 class="wsc-name">Phonk Fury</h3>
-                            <p class="wsc-meta">Aggressive Cuts · Phonk Score · Viral</p>
-                        </div>
-                        <a href="https://bento.me/trimatic" target="_blank" class="wsc-link" aria-label="View Phonk Fury"></a>
-                    </div>
-
-                    <div class="ws-card" data-category="shortform">
-                        <div class="wsc-visual wsc-visual--v4">
-                            <div class="wsc-filmgrain"></div>
-                            <div class="wsc-overlay"></div>
-                            <div class="wsc-center-icon">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                            </div>
+                            <button class="wsc-watch-btn" aria-label="Watch full video">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+                                <span>Watch Full</span>
+                            </button>
                         </div>
                         <div class="wsc-info">
                             <span class="wsc-cat">Short Form</span>
-                            <h3 class="wsc-name">Creator Edits</h3>
+                            <h3 class="wsc-name">Drop Reel</h3>
                             <p class="wsc-meta">YouTube Shorts · Hook-Driven · High Energy</p>
                         </div>
-                        <a href="https://bento.me/trimatic" target="_blank" class="wsc-link" aria-label="View Creator Edits"></a>
                     </div>
 
-                    <div class="ws-card ws-card--tall" data-category="motion">
-                        <div class="wsc-visual wsc-visual--v5">
+                    <!-- CARD 4 — click-to-play — Phonk Edit -->
+                    <div class="ws-card ws-card--play" data-category="phonk">
+                        <div class="wsc-visual">
+                            <div class="wsc-thumb-bg wsc-thumb-bg--phonk" data-vimeo-id="1169194503"></div>
                             <div class="wsc-filmgrain"></div>
                             <div class="wsc-overlay"></div>
-                            <div class="wsc-motion-lines" aria-hidden="true">
-                                <div></div><div></div><div></div><div></div><div></div>
-                            </div>
+                            <button class="wsc-play-btn" data-vimeo-id="1169194503" aria-label="Play Phonk Edit">
+                                <span class="wsc-play-ring"></span>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+                            </button>
                         </div>
                         <div class="wsc-info">
-                            <span class="wsc-cat">Motion Design</span>
-                            <h3 class="wsc-name">Motion Sequence</h3>
-                            <p class="wsc-meta">Kinetic Typography · Lower-Thirds · Transitions</p>
+                            <span class="wsc-cat">Phonk Edit</span>
+                            <h3 class="wsc-name">Phonk Cut</h3>
+                            <p class="wsc-meta">Aggressive Cuts · Phonk Score · Viral</p>
                         </div>
-                        <a href="https://bento.me/trimatic" target="_blank" class="wsc-link" aria-label="View Motion Sequence"></a>
                     </div>
 
-                    <div class="ws-card" data-category="graphic">
-                        <div class="wsc-visual wsc-visual--v6">
+                    <!-- CARD 5 — click-to-play — Cinematic -->
+                    <div class="ws-card ws-card--play" data-category="cinematic">
+                        <div class="wsc-visual">
+                            <div class="wsc-thumb-bg wsc-thumb-bg--cinematic" data-vimeo-id="1169202446"></div>
                             <div class="wsc-filmgrain"></div>
                             <div class="wsc-overlay"></div>
-                            <div class="wsc-logo-anim" aria-hidden="true">
-                                <span>TM</span>
-                            </div>
-                        </div>
-                        <div class="wsc-info">
-                            <span class="wsc-cat">Graphic Design</span>
-                            <h3 class="wsc-name">Brand Identity</h3>
-                            <p class="wsc-meta">Logo · Brand Kit · Visual Identity</p>
-                        </div>
-                        <a href="https://bento.me/trimatic" target="_blank" class="wsc-link" aria-label="View Brand Identity"></a>
-                    </div>
-
-                    <div class="ws-card" data-category="cinematic">
-                        <div class="wsc-visual wsc-visual--v7">
-                            <div class="wsc-filmgrain"></div>
-                            <div class="wsc-overlay"></div>
-                            <div class="wsc-center-icon">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                            </div>
+                            <button class="wsc-play-btn" data-vimeo-id="1169202446" aria-label="Play Brand Film">
+                                <span class="wsc-play-ring"></span>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+                            </button>
                         </div>
                         <div class="wsc-info">
                             <span class="wsc-cat">Cinematic</span>
                             <h3 class="wsc-name">Brand Film</h3>
                             <p class="wsc-meta">Commercial · Narrative · Colour Story</p>
                         </div>
-                        <a href="https://bento.me/trimatic" target="_blank" class="wsc-link" aria-label="View Brand Film"></a>
                     </div>
 
-                    <div class="ws-card" data-category="graphic">
-                        <div class="wsc-visual wsc-visual--v8">
+                    <!-- CARD 6 — ambient loop + click lightbox, TALL — Motion Design -->
+                    <div class="ws-card ws-card--tall ws-card--ambient" data-category="motion" data-vimeo-id="1169199691">
+                        <div class="wsc-visual">
+                            <iframe class="wsc-vimeo-frame"
+                                data-src="https://player.vimeo.com/video/1169199691?background=1&autoplay=1&loop=1&muted=1&quality=360p&byline=0&title=0&portrait=0&dnt=1"
+                                frameborder="0" allow="autoplay; fullscreen; picture-in-picture"
+                                aria-hidden="true"></iframe>
                             <div class="wsc-filmgrain"></div>
                             <div class="wsc-overlay"></div>
-                            <div class="wsc-thumb-grid" aria-hidden="true">
-                                <div></div><div></div><div></div><div></div>
+                            <div class="wsc-ambient-badge" aria-hidden="true">
+                                <span class="wsc-live-dot"></span> LIVE
                             </div>
+                            <button class="wsc-watch-btn" aria-label="Watch full video">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+                                <span>Watch Full</span>
+                            </button>
                         </div>
                         <div class="wsc-info">
-                            <span class="wsc-cat">Graphic Design</span>
-                            <h3 class="wsc-name">Thumbnail Pack</h3>
-                            <p class="wsc-meta">YouTube CTR · Bold Type · Click Magnet</p>
+                            <span class="wsc-cat">Motion Design</span>
+                            <h3 class="wsc-name">Motion Pack</h3>
+                            <p class="wsc-meta">Kinetic Type · Lower-Thirds · Transitions</p>
                         </div>
-                        <a href="https://bento.me/trimatic" target="_blank" class="wsc-link" aria-label="View Thumbnail Pack"></a>
+                    </div>
+
+                    <!-- CARD 7 — click-to-play — Short Form -->
+                    <div class="ws-card ws-card--play" data-category="shortform">
+                        <div class="wsc-visual">
+                            <div class="wsc-thumb-bg wsc-thumb-bg--shortform" data-vimeo-id="1169200215"></div>
+                            <div class="wsc-filmgrain"></div>
+                            <div class="wsc-overlay"></div>
+                            <button class="wsc-play-btn" data-vimeo-id="1169200215" aria-label="Play Creator Cut">
+                                <span class="wsc-play-ring"></span>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+                            </button>
+                        </div>
+                        <div class="wsc-info">
+                            <span class="wsc-cat">Short Form</span>
+                            <h3 class="wsc-name">Creator Cut</h3>
+                            <p class="wsc-meta">Reels · Hook-Driven · High Energy</p>
+                        </div>
                     </div>
 
                 </div><!-- /ws-grid -->
 
             </div><!-- /ws-inner -->
+        </section>
+
+
+        <!-- ═══════════════════════════════════════
+             CINEMATIC REEL SECTION — Multi-Video Carousel
+        ═══════════════════════════════════════ -->
+        <section class="reel-section" id="reel" aria-label="Showreel">
+
+            <!-- ── VIDEO TRACK ──────────────────────── -->
+            <div class="reel-track" id="reelTrack">
+
+                <!-- SLIDE 1 -->
+                <div class="reel-slide reel-slide--active" data-title="Showreel 2025" data-cat="◆ All Categories">
+                    <video class="reel-video" muted loop playsinline preload="metadata" aria-hidden="true">
+                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <!-- SLIDE 2 -->
+                <div class="reel-slide" data-title="Cinematic Edits" data-cat="◆ Cinematic">
+                    <video class="reel-video" muted loop playsinline preload="metadata" aria-hidden="true">
+                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <!-- SLIDE 3 -->
+                <div class="reel-slide" data-title="Short Form" data-cat="◆ Reels &amp; Shorts">
+                    <video class="reel-video" muted loop playsinline preload="metadata" aria-hidden="true">
+                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <!-- SLIDE 4 -->
+                <div class="reel-slide" data-title="Brand Films" data-cat="◆ Motion Design">
+                    <video class="reel-video" muted loop playsinline preload="metadata" aria-hidden="true">
+                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <!-- ↑ Add more slides above this line ↑ -->
+
+            </div><!-- /reel-track -->
+
+            <!-- ── CINEMATIC OVERLAYS ─────────────────── -->
+            <div class="reel-overlay reel-overlay--top" aria-hidden="true"></div>
+            <div class="reel-overlay reel-overlay--bottom" aria-hidden="true"></div>
+            <div class="reel-overlay reel-overlay--vignette" aria-hidden="true"></div>
+            <div class="reel-scanlines" aria-hidden="true"></div>
+
+            <!-- ── SLIDE CONTENT (updated by JS) ─────── -->
+            <div class="reel-content" aria-live="polite">
+                <span class="reel-eyebrow" id="reelCat">◆ All Categories</span>
+                <h2 class="reel-title">
+                    <span id="reelTitleMain">Showreel</span>
+                    <span class="reel-title-line--outline" id="reelTitleSub">2025</span>
+                </h2>
+                <a href="https://bento.me/trimatic" target="_blank" rel="noopener"
+                    class="reel-cta magnetic-btn cursor-target">
+                    <span>Watch Full Reel</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M7 7h10v10M7 17L17 7" />
+                    </svg>
+                </a>
+            </div>
+
+            <!-- ── NAVIGATION ARROWS ──────────────────── -->
+            <button class="reel-nav reel-nav--prev" id="reelPrev" aria-label="Previous video">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M15 18l-6-6 6-6" />
+                </svg>
+            </button>
+            <button class="reel-nav reel-nav--next" id="reelNext" aria-label="Next video">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+            </button>
+
+            <!-- ── BOTTOM BAR ──────────────────────────── -->
+            <div class="reel-bar">
+
+                <!-- Dot indicators (built by JS) -->
+                <div class="reel-dots" id="reelDots" role="group" aria-label="Slide indicators"></div>
+
+                <!-- Counter -->
+                <div class="reel-counter">
+                    <span id="reelIdx">01</span>
+                    <span class="reel-counter-sep"> / </span>
+                    <span id="reelTotal">04</span>
+                </div>
+
+                <!-- Mute toggle -->
+                <button class="reel-mute-btn" id="reelMuteBtn" aria-label="Unmute video" title="Toggle sound">
+                    <svg class="reel-icon reel-icon--muted" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.8">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                        <line x1="23" y1="9" x2="17" y2="15" />
+                        <line x1="17" y1="9" x2="23" y2="15" />
+                    </svg>
+                    <svg class="reel-icon reel-icon--unmuted" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.8">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+                    </svg>
+                </button>
+
+            </div><!-- /reel-bar -->
+
+            <!-- Corner watermark -->
+            <div class="reel-corner-label" aria-hidden="true">
+                <span>TRIMATIC STUDIO</span>
+                <span>SHOWREEL</span>
+            </div>
+
         </section>
 
 
@@ -1121,139 +1312,165 @@
 
             <div class="cs-inner">
 
-                <!-- Section header — centered above both columns -->
+                <!-- Editorial header -->
                 <div class="cs-header">
                     <div class="cs-eyebrow">
                         <span class="cs-dot"></span>
-                        <span>Available for projects — Est. 2024 · India</span>
+                        <span>Available for projects &mdash; Est. 2024 &middot; India</span>
                     </div>
-
                     <h2 class="cs-title" id="csTitle">
-                        <span class="cs-title-line"><span class="cs-title-word">Let's Create</span></span>
+                        <span class="cs-title-line"><span class="cs-title-word">Let&apos;s Create</span></span>
                         <span class="cs-title-line cs-title-line--outline"><span class="cs-title-word">Something</span></span>
                         <span class="cs-title-line"><span class="cs-title-word">Legendary</span></span>
                     </h2>
-
-                    <p class="cs-sub">Drop a message or reach out directly — we respond fast.</p>
+                    <div class="cs-header-rule" aria-hidden="true">
+                        <div class="cs-rule-line"></div>
+                        <div class="cs-rule-pip"></div>
+                        <div class="cs-rule-line"></div>
+                    </div>
                 </div>
 
-                <!-- Two-column body -->
+                <!-- Two-column body — Editorial Open v3 -->
                 <div class="cs-body">
 
-                    <!-- LEFT — channels + availability -->
+                    <!-- LEFT — Editorial, open, no boxes -->
                     <div class="cs-left">
+
                         <div class="cs-avail-badge">
                             <span class="cs-avail-dot"></span>
-                            <span>Open for new projects in 2026</span>
+                            <span>Available &mdash; 2026</span>
                         </div>
 
-                        <div class="cs-channels">
-                            <a href="https://www.instagram.com/trimatic_/" target="_blank" rel="noopener" class="cs-channel magnetic-btn">
-                                <div class="csch-icon">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-                                </div>
-                                <div class="csch-text">
-                                    <span class="csch-label">Instagram</span>
-                                    <span class="csch-handle">@trimatic_</span>
-                                </div>
-                                <div class="csch-arrow">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h10v10M7 17L17 7"/></svg>
-                                </div>
-                            </a>
+                        <div class="cs-left-hl">
+                            <span class="cslh-top">Ready To</span>
+                            <span class="cslh-accent">Create.</span>
+                        </div>
 
-                            <a href="mailto:tri.matic.ns@gmail.com" class="cs-channel magnetic-btn">
-                                <div class="csch-icon">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                                </div>
-                                <div class="csch-text">
-                                    <span class="csch-label">Email</span>
-                                    <span class="csch-handle">tri.matic.ns@gmail.com</span>
-                                </div>
-                                <div class="csch-arrow">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h10v10M7 17L17 7"/></svg>
-                                </div>
-                            </a>
+                        <p class="cs-statement">We turn raw ideas into scroll-stopping visuals.<br>Drop a message &mdash; we reply within 24 hours.</p>
 
-                            <a href="https://wa.me/+917970869003" target="_blank" rel="noopener" class="cs-channel magnetic-btn">
-                                <div class="csch-icon">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
-                                </div>
-                                <div class="csch-text">
-                                    <span class="csch-label">WhatsApp</span>
-                                    <span class="csch-handle">+91 79708 69003</span>
-                                </div>
-                                <div class="csch-arrow">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h10v10M7 17L17 7"/></svg>
-                                </div>
+                        <div class="cs-stats-row">
+                            <div class="cs-stat">
+                                <span class="cs-stat__num">24<span class="cs-stat__unit">h</span></span>
+                                <span class="cs-stat__label">Response</span>
+                            </div>
+                            <span class="cs-stat-sep" aria-hidden="true"></span>
+                            <div class="cs-stat">
+                                <span class="cs-stat__num">100<span class="cs-stat__unit">%</span></span>
+                                <span class="cs-stat__label">Satisfaction</span>
+                            </div>
+                            <span class="cs-stat-sep" aria-hidden="true"></span>
+                            <div class="cs-stat">
+                                <span class="cs-stat__num">50<span class="cs-stat__unit">+</span></span>
+                                <span class="cs-stat__label">Projects</span>
+                            </div>
+                        </div>
+
+                        <div class="cs-left-rule" aria-hidden="true"></div>
+
+                        <p class="cs-reach-label">Get in touch</p>
+
+                        <div class="cs-socials">
+                            <a href="https://www.instagram.com/trimatic_/" target="_blank" rel="noopener"
+                               class="cs-social-btn" aria-label="Instagram @trimatic_" data-tooltip="@trimatic_">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                                    <rect x="2" y="2" width="20" height="20" rx="5"/>
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                                    <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"/>
+                                </svg>
+                            </a>
+                            <a href="mailto:tri.matic.ns@gmail.com"
+                               class="cs-social-btn" aria-label="Email tri.matic.ns@gmail.com" data-tooltip="tri.matic.ns@gmail.com">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                    <polyline points="22,6 12,13 2,6"/>
+                                </svg>
+                            </a>
+                            <a href="https://wa.me/+917970869003" target="_blank" rel="noopener"
+                               class="cs-social-btn" aria-label="WhatsApp +91 79708 69003" data-tooltip="+91 79708 69003">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                                </svg>
                             </a>
                         </div>
 
-                        <p class="cs-left-note">Typical response time is under 12 hours.</p>
-                    </div>
+                    </div><!-- /cs-left -->
 
-                    <!-- RIGHT — contact form -->
+                    <!-- RIGHT — Clean form, no wrapper box -->
                     <div class="cs-right">
+
+                        <div class="cs-form-top">
+                            <span class="cs-form-eyebrow">Start a Project</span>
+                            <p class="cs-form-sub">Tell us what you need &mdash; we&apos;ll get back within 24 hours.</p>
+                        </div>
+
                         <form class="cs-form" id="csForm" novalidate>
+
                             <div class="cs-form__row">
                                 <div class="cs-field">
                                     <label class="cs-field__label" for="cf-name">Your Name</label>
-                                    <input class="cs-field__input" id="cf-name" type="text" name="name"
-                                        placeholder="John Doe" autocomplete="name" required>
+                                    <input class="cs-field__input" id="cf-name" type="text" name="name" placeholder="What should we call you?" autocomplete="name" required>
+                                    <span class="cs-field__bar" aria-hidden="true"></span>
                                 </div>
                                 <div class="cs-field">
-                                    <label class="cs-field__label" for="cf-email">Email Address</label>
-                                    <input class="cs-field__input" id="cf-email" type="email" name="email"
-                                        placeholder="you@example.com" autocomplete="email" required>
+                                    <label class="cs-field__label" for="cf-email">Email</label>
+                                    <input class="cs-field__input" id="cf-email" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+                                    <span class="cs-field__bar" aria-hidden="true"></span>
                                 </div>
                             </div>
 
-                            <div class="cs-field">
-                                <label class="cs-field__label" for="cf-service">Service Needed</label>
-                                <div class="cs-select-wrap">
-                                    <select class="cs-field__input cs-field__select" id="cf-service" name="service">
-                                        <option value="" disabled selected>Select a service…</option>
-                                        <option value="short-form">Short Form Video</option>
-                                        <option value="cinematic">Cinematic Edit</option>
-                                        <option value="phonk">Phonk / Trending Edit</option>
-                                        <option value="logo">Logo Design</option>
-                                        <option value="social">Social Media Graphics</option>
-                                        <option value="brand-kit">Brand Kit</option>
-                                        <option value="other">Other / Not Sure</option>
-                                    </select>
-                                    <span class="cs-select-arrow">
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-                                    </span>
+                            <div class="cs-field cs-field--service">
+                                <label class="cs-field__label">Service</label>
+                                <input type="hidden" name="service" id="cf-service" value="">
+                                <div class="cs-service-pills" id="cf-service-pills" role="group" aria-label="Select a service">
+                                    <button type="button" class="cs-pill" data-value="short-form">Short Form</button>
+                                    <button type="button" class="cs-pill" data-value="cinematic">Cinematic</button>
+                                    <button type="button" class="cs-pill" data-value="phonk">Phonk Edit</button>
+                                    <button type="button" class="cs-pill" data-value="logo">Logo Design</button>
+                                    <button type="button" class="cs-pill" data-value="social">Social Graphics</button>
+                                    <button type="button" class="cs-pill" data-value="brand-kit">Brand Kit</button>
+                                    <button type="button" class="cs-pill" data-value="other">Other</button>
                                 </div>
                             </div>
 
                             <div class="cs-field">
                                 <label class="cs-field__label" for="cf-msg">Message</label>
-                                <textarea class="cs-field__input cs-field__textarea" id="cf-msg" name="message"
-                                    placeholder="Tell us about your project, timeline, budget…" rows="5" required></textarea>
+                                <textarea class="cs-field__input cs-field__textarea" id="cf-msg" name="message" placeholder="Tell us about your project, timeline, budget&hellip;" rows="5" required></textarea>
+                                <span class="cs-field__bar" aria-hidden="true"></span>
                             </div>
 
-                            <button class="cs-form__submit magnetic-btn" type="submit">
-                                <span class="cs-submit-text">Send Message</span>
-                                <span class="cs-submit-icon">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
-                                </span>
-                            </button>
+                            <div class="cs-form__footer">
+                                <button class="cs-form__submit magnetic-btn" type="submit">
+                                    <span class="cs-submit-text">Send Message</span>
+                                    <span class="cs-submit-icon">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+                                    </span>
+                                </button>
+                                <p class="cs-form__note">No spam &mdash; just results.</p>
+                            </div>
 
-                            <!-- Success state -->
+                            <!-- success — hidden by CSS default, shown by JS -->
                             <div class="cs-form__success" id="csFormSuccess" hidden>
-                                <span class="cs-success-icon">✓</span>
-                                <span>Message sent! We'll be in touch soon.</span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                <div>
+                                    <strong>Message received!</strong>
+                                    <span>We&apos;ll be in touch soon.</span>
+                                </div>
                             </div>
+
                         </form>
-                    </div>
+
+                    </div><!-- /cs-right -->
 
                 </div><!-- /cs-body -->
+
+                <!-- Footer Brand Text -->
+                <div class="footer-brand-text" aria-hidden="true">TRI MATIC</div>
 
                 <!-- Footer Bar -->
                 <div class="cs-footer-bar">
                     <div class="cs-footer-left">
                         <span class="cs-logo-text">TRI MATIC</span>
-                        <span class="cs-footer-tagline">Be The Prime.</span>
+                        <span class="cs-footer-tagline">Be The Prime</span>
                     </div>
                     <div class="cs-footer-center">
                         <span>© 2026 Tri Matic · India</span>
@@ -1273,10 +1490,199 @@
 
     <!-- Scripts -->
     <div id="a11y-live" class="sr-only" aria-live="polite" aria-atomic="true"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-    <script src="js/main.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script defer src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+    <script defer src="js/main.js"></script>
+
+    <!-- ── Reel Section Player ── -->
+    <script>
+        (function () {
+            'use strict';
+
+            const track    = document.getElementById('reelTrack');
+            const dotsWrap = document.getElementById('reelDots');
+            const prevBtn  = document.getElementById('reelPrev');
+            const nextBtn  = document.getElementById('reelNext');
+            const muteBtn  = document.getElementById('reelMuteBtn');
+            const idxEl    = document.getElementById('reelIdx');
+            const totEl    = document.getElementById('reelTotal');
+            const catEl    = document.getElementById('reelCat');
+            const titleMain = document.getElementById('reelTitleMain');
+            const titleSub  = document.getElementById('reelTitleSub');
+
+            if (!track) return;
+
+            const slides = Array.from(track.querySelectorAll('.reel-slide'));
+            const videos = slides.map(function (s) { return s.querySelector('.reel-video'); });
+            let current = 0;
+            let isMuted = true;
+
+            /* build dot buttons */
+            slides.forEach(function (_, i) {
+                var dot = document.createElement('button');
+                dot.className = 'reel-dot' + (i === 0 ? ' reel-dot--active' : '');
+                dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+                dot.addEventListener('click', function () { goTo(i); });
+                dotsWrap.appendChild(dot);
+            });
+
+            var dots = Array.from(dotsWrap.querySelectorAll('.reel-dot'));
+            if (totEl) totEl.textContent = String(slides.length).padStart(2, '0');
+
+            function goTo(n) {
+                slides[current].classList.remove('reel-slide--active');
+                dots[current].classList.remove('reel-dot--active');
+                videos[current].pause();
+
+                current = (n + slides.length) % slides.length;
+
+                slides[current].classList.add('reel-slide--active');
+                dots[current].classList.add('reel-dot--active');
+
+                var data = slides[current].dataset;
+                if (catEl) catEl.textContent = data.cat || '';
+                if (titleMain && titleSub) {
+                    var parts = (data.title || '').split(' ');
+                    titleMain.textContent = parts.slice(0, -1).join(' ') || parts[0];
+                    titleSub.textContent  = parts.length > 1 ? parts[parts.length - 1] : '';
+                }
+                if (idxEl) idxEl.textContent = String(current + 1).padStart(2, '0');
+
+                var vid = videos[current];
+                vid.muted = isMuted;
+                vid.play().catch(function () {});
+            }
+
+            /* arrows */
+            if (prevBtn) prevBtn.addEventListener('click', function () { goTo(current - 1); });
+            if (nextBtn) nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+            /* keyboard — only when reel is in view and user isn't typing */
+            var reelInView = false;
+            if (section) {
+                var kbObserver = new IntersectionObserver(function (entries) {
+                    reelInView = entries[0].isIntersecting;
+                }, { threshold: 0.15 });
+                kbObserver.observe(section);
+            }
+            document.addEventListener('keydown', function (e) {
+                if (!reelInView) return;
+                var tag = (e.target.tagName || '').toLowerCase();
+                if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
+                if (e.key === 'ArrowLeft')  goTo(current - 1);
+                if (e.key === 'ArrowRight') goTo(current + 1);
+            });
+
+            /* mute toggle */
+            if (muteBtn) muteBtn.addEventListener('click', function () {
+                isMuted = !isMuted;
+                videos.forEach(function (v) { v.muted = isMuted; });
+                muteBtn.classList.toggle('reel-mute-btn--on', !isMuted);
+                muteBtn.setAttribute('aria-label', isMuted ? 'Unmute video' : 'Mute video');
+            });
+
+            /* IntersectionObserver: auto-play when section is in view */
+            var section = document.getElementById('reel');
+            if (section) {
+                var observer = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            var v = videos[current];
+                            v.muted = isMuted;
+                            v.play().catch(function () {});
+                        } else {
+                            videos.forEach(function (v) { v.pause(); });
+                        }
+                    });
+                }, { threshold: 0.3 });
+                observer.observe(section);
+            }
+
+            /* swipe support (mobile) */
+            var touchStartX = 0;
+            if (section) {
+                section.addEventListener('touchstart', function (e) {
+                    touchStartX = e.changedTouches[0].clientX;
+                }, { passive: true });
+                section.addEventListener('touchend', function (e) {
+                    var dx = e.changedTouches[0].clientX - touchStartX;
+                    if (Math.abs(dx) > 50) goTo(dx < 0 ? current + 1 : current - 1);
+                }, { passive: true });
+            }
+
+            /* boot */
+            goTo(0);
+        })();
+    </script>
+
+    <!-- ── Service Pill Selector ── -->
+    <script>
+        (function () {
+            'use strict';
+            var pillsEl  = document.getElementById('cf-service-pills');
+            var hiddenEl = document.getElementById('cf-service');
+            if (!pillsEl || !hiddenEl) return;
+
+            pillsEl.querySelectorAll('.cs-pill').forEach(function (pill) {
+                pill.addEventListener('click', function () {
+                    pillsEl.querySelectorAll('.cs-pill').forEach(function (p) {
+                        p.classList.remove('is-active');
+                        p.setAttribute('aria-pressed', 'false');
+                    });
+                    pill.classList.add('is-active');
+                    pill.setAttribute('aria-pressed', 'true');
+                    hiddenEl.value = pill.dataset.value || '';
+                });
+            });
+        })();
+    </script>
+
+    <!-- ── Contact Section — GSAP Reveal ── -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            'use strict';
+            if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+            var tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: '.cs-body',
+                    start: 'top 78%',
+                    once: true
+                }
+            });
+
+            /* Left column — staggered reveal */
+            tl.from('.cs-avail-badge', { opacity: 0, y: 16, duration: 0.5, ease: 'power3.out' }, 0)
+              .from('.cs-left-hl', { opacity: 0, y: 30, duration: 0.7, ease: 'power3.out' }, 0.1)
+              .from('.cs-statement', { opacity: 0, y: 20, duration: 0.6, ease: 'power3.out' }, 0.22)
+              .from('.cs-stats-row', { opacity: 0, y: 18, duration: 0.55, ease: 'power3.out' }, 0.32)
+              .from('.cs-left-rule', { scaleX: 0, transformOrigin: 'left', duration: 0.5, ease: 'power2.inOut' }, 0.42)
+              .from('.cs-reach-label', { opacity: 0, duration: 0.4, ease: 'power2.out' }, 0.5)
+              .from('.cs-social-btn', { opacity: 0, y: 14, scale: 0.9, duration: 0.45, ease: 'back.out(1.4)', stagger: 0.08 }, 0.55);
+
+            /* Right column */
+            tl.from('.cs-form-top', { opacity: 0, y: 24, duration: 0.6, ease: 'power3.out' }, 0.18)
+              .from('.cs-field', { opacity: 0, y: 16, duration: 0.5, ease: 'power3.out', stagger: 0.08 }, 0.32)
+              .from('.cs-form__footer', { opacity: 0, y: 12, duration: 0.5, ease: 'power3.out' }, 0.62);
+        });
+    </script>
+
+    <!-- ═══════════════════════════════════════
+         VIMEO LIGHTBOX — global modal player
+    ═══════════════════════════════════════ -->
+    <div class="vimeo-lightbox" id="vimeoLightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Video player">
+        <div class="vlb-backdrop" id="vlbBackdrop"></div>
+        <div class="vlb-frame-wrap">
+            <iframe class="vlb-iframe" id="vlbIframe"
+                frameborder="0"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowfullscreen></iframe>
+        </div>
+        <button class="vlb-close" id="vlbClose" aria-label="Close video">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+    </div>
 </body>
 
 </html>
