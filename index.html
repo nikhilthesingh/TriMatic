@@ -1407,16 +1407,21 @@
                             <p class="cs-form-sub">Tell us what you need &mdash; we&apos;ll get back within 24 hours.</p>
                         </div>
 
-                        <form class="cs-form" id="csForm" novalidate>
+                        <form class="cs-form" id="csForm" novalidate action="https://api.web3forms.com/submit" method="POST">
+
+                            <input type="hidden" name="access_key" value="1403a4fe-f907-47fb-a345-ed062c09bd3a">
+                            <input type="hidden" name="subject" value="New website enquiry - Tri Matic">
+                            <input type="hidden" name="from_name" value="Tri Matic Website">
+                            <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
 
                             <div class="cs-form__row">
                                 <div class="cs-field">
-                                    <label class="cs-field__label" for="cf-name">Your Name</label>
+                                    <label class="cs-field__label" for="cf-name">Your Name *</label>
                                     <input class="cs-field__input" id="cf-name" type="text" name="name" placeholder="What should we call you?" autocomplete="name" required>
                                     <span class="cs-field__bar" aria-hidden="true"></span>
                                 </div>
                                 <div class="cs-field">
-                                    <label class="cs-field__label" for="cf-email">Email</label>
+                                    <label class="cs-field__label" for="cf-email">Email *</label>
                                     <input class="cs-field__input" id="cf-email" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
                                     <span class="cs-field__bar" aria-hidden="true"></span>
                                 </div>
@@ -1428,16 +1433,16 @@
                                 <div class="cs-service-pills" id="cf-service-pills" role="group" aria-label="Select a service">
                                     <button type="button" class="cs-pill" data-value="short-form">Short Form</button>
                                     <button type="button" class="cs-pill" data-value="cinematic">Cinematic</button>
-                                    <button type="button" class="cs-pill" data-value="phonk">Phonk Edit</button>
+                                    <button type="button" class="cs-pill" data-value="phonk">Creative Edit</button>
                                     <button type="button" class="cs-pill" data-value="logo">Logo Design</button>
                                     <button type="button" class="cs-pill" data-value="social">Social Graphics</button>
-                                    <button type="button" class="cs-pill" data-value="brand-kit">Brand Kit</button>
+                                    <button type="button" class="cs-pill" data-value="brand-kit">Long Form</button>
                                     <button type="button" class="cs-pill" data-value="other">Other</button>
                                 </div>
                             </div>
 
                             <div class="cs-field">
-                                <label class="cs-field__label" for="cf-msg">Message</label>
+                                <label class="cs-field__label" for="cf-msg">Message *</label>
                                 <textarea class="cs-field__input cs-field__textarea" id="cf-msg" name="message" placeholder="Tell us about your project, timeline, budget&hellip;" rows="5" required></textarea>
                                 <span class="cs-field__bar" aria-hidden="true"></span>
                             </div>
@@ -1449,7 +1454,7 @@
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
                                     </span>
                                 </button>
-                                <p class="cs-form__note">No spam &mdash; just results.</p>
+                                <p class="cs-form__note" id="csFormNote" aria-live="polite">No spam &mdash; just results.</p>
                             </div>
 
                             <!-- success — hidden by CSS default, shown by JS -->
@@ -1580,8 +1585,10 @@
 
             function pauseSlide(i) {
                 if (platforms[i] === 'vimeo' && players[i]) {
+                    players[i].setVolume(0).catch(function () {}); // mute first to prevent bleed
                     players[i].pause().catch(function () {});
                 } else if (platforms[i] === 'youtube' && iframes[i] && iframes[i].getAttribute('src')) {
+                    ytCommand(iframes[i], 'mute');
                     ytCommand(iframes[i], 'pauseVideo');
                 }
             }
@@ -1666,12 +1673,10 @@
             if (muteBtn) muteBtn.addEventListener('click', function () {
                 isMuted = !isMuted;
                 var vol = isMuted ? 0 : 1;
-                // Vimeo players
-                players.forEach(function (p) {
-                    if (p) p.setVolume(vol).catch(function () {});
-                });
-                // YouTube: mute/unmute current slide
-                if (platforms[current] === 'youtube' && iframes[current] && iframes[current].getAttribute('src')) {
+                // Only adjust volume on the CURRENT slide (not all players)
+                if (platforms[current] === 'vimeo' && players[current]) {
+                    players[current].setVolume(vol).catch(function () {});
+                } else if (platforms[current] === 'youtube' && iframes[current] && iframes[current].getAttribute('src')) {
                     ytCommand(iframes[current], isMuted ? 'mute' : 'unMute');
                 }
                 muteBtn.classList.toggle('reel-mute-btn--on', !isMuted);

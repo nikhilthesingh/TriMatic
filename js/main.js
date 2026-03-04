@@ -3219,11 +3219,9 @@ function initWorkShowcase() {
         });
     }, { rootMargin: '200px 0px' }); // start loading before card is visible
 
-    // Skip ambient iframe loading entirely on touch/mobile — too heavy (3 concurrent Vimeo players)
-    const isTouchDevice = window.matchMedia('(hover: none)').matches;
-    if (!isTouchDevice) {
-        document.querySelectorAll('.wsc-vimeo-frame').forEach(f => ambientObserver.observe(f));
-    }
+    // Observe ambient iframes on all devices (mobile included).
+    // rootMargin keeps them lazy enough that only nearby frames load.
+    document.querySelectorAll('.wsc-vimeo-frame').forEach(f => ambientObserver.observe(f));
 
     // ── Vimeo oEmbed thumbnail fetch — lazy, fires when grid enters viewport ──
     // No img tags / 3rd-party CDN: we hit Vimeo's own CORS-enabled oEmbed endpoint
@@ -3542,49 +3540,129 @@ function initContactAnimations() {
 
     const btn     = form.querySelector('.cs-form__submit');
     const btnText = form.querySelector('.cs-submit-text');
+    const note    = form.querySelector('#csFormNote');
+    const nameEl  = form.querySelector('#cf-name');
+    const emailEl = form.querySelector('#cf-email');
+    const msgEl   = form.querySelector('#cf-msg');
+    const serviceInput = form.querySelector('#cf-service');
+    const servicePills = form.querySelectorAll('#cf-service-pills .cs-pill');
 
-    form.addEventListener('submit', function (e) {
+    function setNote(message, tone) {
+        if (!note) return;
+        note.textContent = message;
+        note.classList.remove('is-error', 'is-success');
+        if (tone === 'error') note.classList.add('is-error');
+        if (tone === 'success') note.classList.add('is-success');
+    }
+
+    function activateService(pill) {
+        servicePills.forEach((other) => {
+            other.classList.remove('is-active');
+            other.setAttribute('aria-pressed', 'false');
+        });
+
+        pill.classList.add('is-active');
+        pill.setAttribute('aria-pressed', 'true');
+        if (serviceInput) serviceInput.value = (pill.textContent || '').trim();
+    }
+
+    servicePills.forEach((pill) => {
+        pill.setAttribute('aria-pressed', 'false');
+        pill.addEventListener('mousedown', (event) => event.preventDefault());
+        pill.addEventListener('click', () => activateService(pill));
+        pill.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                activateService(pill);
+            }
+        });
+    });
+
+    form.addEventListener('submit', async function (e) {
         e.preventDefault();
 
-        const name  = form.querySelector('#cf-name').value.trim();
-        const email = form.querySelector('#cf-email').value.trim();
-        const msg   = form.querySelector('#cf-msg').value.trim();
+        const name  = nameEl?.value.trim() || '';
+        const email = emailEl?.value.trim() || '';
+        const msg   = msgEl?.value.trim() || '';
         if (!name || !email || !msg) {
             /* Shake the missing fields */
-            [form.querySelector('#cf-name'), form.querySelector('#cf-email'), form.querySelector('#cf-msg')].forEach(el => {
-                if (!el.value.trim()) gsap.fromTo(el, { x: -6 }, { x: 0, duration: 0.4, ease: 'elastic.out(1.2,0.4)' });
+            [nameEl, emailEl, msgEl].forEach(el => {
+                if (el && !el.value.trim()) gsap.fromTo(el, { x: -6 }, { x: 0, duration: 0.4, ease: 'elastic.out(1.2,0.4)' });
             });
+            setNote('Please fill in your name, email, and message.', 'error');
             return;
         }
 
         /* Validate email format */
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            const emailEl = form.querySelector('#cf-email');
             gsap.fromTo(emailEl, { x: -6 }, { x: 0, duration: 0.45, ease: 'elastic.out(1.2,0.4)' });
             emailEl.focus();
             emailEl.setAttribute('aria-invalid', 'true');
             emailEl.closest('.cs-field')?.classList.add('cs-field--error');
             setTimeout(() => emailEl.setAttribute('aria-invalid', 'false'), 2500);
+            setNote('Please enter a valid email address.', 'error');
             return;
         }
-        form.querySelector('#cf-email')?.closest('.cs-field')?.classList.remove('cs-field--error');
+        emailEl?.closest('.cs-field')?.classList.remove('cs-field--error');
 
         if (btn)     btn.disabled = true;
         if (btnText) btnText.textContent = 'Sending…';
+        setNote('Sending your message…');
 
-        /* Swap for Formspree / EmailJS / backend in production */
-        setTimeout(() => {
+        try {
+            const formData = new FormData(form);
+            const selectedPill = form.querySelector('#cf-service-pills .cs-pill.is-active');
+            const selectedService = (
+                (selectedPill?.textContent || '').trim() ||
+                (serviceInput?.value || '').trim()
+            );
+
+            if (selectedService) {
+                formData.set('service', selectedService);
+            } else {
+                formData.set('service', 'Not specified');
+            }
+
+            const response = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: { Accept: 'application/json' },
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (!response.ok || !result.success) {
+                throw new Error(result.message || 'Unable to send your message right now.');
+            }
+
             gsap.to(form.querySelectorAll('.cs-field, .cs-form__row, .cs-form__footer'), {
-                opacity: 0, y: -8, duration: 0.35, stagger: 0.05, ease: 'power2.in',
+                opacity: 0,
+                y: -8,
+                duration: 0.35,
+                stagger: 0.05,
+                ease: 'power2.in',
                 onComplete: () => {
                     form.querySelectorAll('.cs-field, .cs-form__row, .cs-form__footer').forEach(el => el.style.display = 'none');
                     success.removeAttribute('hidden');
                     gsap.from(success, { opacity: 0, y: 12, duration: 0.55, ease: 'power3.out' });
                 }
             });
+
             form.reset();
-        }, 900);
+            servicePills.forEach((pill) => {
+                pill.classList.remove('is-active');
+                pill.setAttribute('aria-pressed', 'false');
+            });
+            if (serviceInput) serviceInput.value = '';
+            setNote('Message sent successfully. We will get back within 24 hours.', 'success');
+            announce('Message sent successfully. We will get back to you soon.');
+        } catch (error) {
+            if (btn) btn.disabled = false;
+            if (btnText) btnText.textContent = 'Send Message';
+            setNote('Could not send right now. Please try again in a moment.', 'error');
+            announce('Message could not be sent. Please try again.');
+        }
     });
 }
 
