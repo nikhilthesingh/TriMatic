@@ -3282,12 +3282,12 @@ function initWorkShowcase() {
         entries.forEach(entry => {
             if (!entry.isIntersecting) return;
             // Thumbnails for play cards
-            document.querySelectorAll('.wsc-thumb-bg[data-vimeo-id]').forEach(el => {
-                fetchVimeoThumb(el, el.dataset.vimeoId);
+            document.querySelectorAll('.wsc-thumb-bg[data-vid]').forEach(el => {
+                fetchVimeoThumb(el, el.dataset.vid);
             });
             // Aspect-ratio prefetch for ambient cards (no thumbnail needed, just dimensions)
-            document.querySelectorAll('.ws-card--ambient[data-vimeo-id]').forEach(card => {
-                prefetchVimeoAspect(card.dataset.vimeoId);
+            document.querySelectorAll('.ws-card--ambient[data-vid]').forEach(card => {
+                prefetchVimeoAspect(card.dataset.vid);
             });
             thumbTriggerObserver.disconnect(); // fire once
         });
@@ -3316,8 +3316,10 @@ function initWorkShowcase() {
         vlbFrameWrap.style.aspectRatio = `${w} / ${h}`;
     }
 
-    function openLightbox(videoId) {
+    function openLightbox(videoId, platform) {
         if (!videoId) return;
+        platform = platform || 'vimeo';
+
         // Cancel any pending close-timer (prevents race if user re-opens quickly)
         if (vlbCloseTimer) { clearTimeout(vlbCloseTimer); vlbCloseTimer = null; }
 
@@ -3325,34 +3327,42 @@ function initWorkShowcase() {
         vlbFrameWrap.classList.remove('vlb-portrait', 'vlb-landscape');
         vlbFrameWrap.style.aspectRatio = '';
 
-        // Apply cached aspect ratio instantly; if not cached, fetch and apply
-        const cached = vimeoAspectCache.get(videoId);
-        if (cached) {
-            applyLightboxAspect(cached.w, cached.h);
+        if (platform === 'youtube') {
+            // YouTube — always 16:9 landscape
+            applyLightboxAspect(16, 9);
+            vlbIframe.src = [
+                `https://www.youtube.com/embed/${videoId}`,
+                '?autoplay=1&rel=0&modestbranding=1',
+                '&color=white&playsinline=1'
+            ].join('');
         } else {
-            prefetchVimeoAspect(videoId).then(() => {
-                const data = vimeoAspectCache.get(videoId);
-                if (data) applyLightboxAspect(data.w, data.h);
-            });
+            // Vimeo — detect aspect ratio from oEmbed cache
+            const cached = vimeoAspectCache.get(videoId);
+            if (cached) {
+                applyLightboxAspect(cached.w, cached.h);
+            } else {
+                prefetchVimeoAspect(videoId).then(() => {
+                    const data = vimeoAspectCache.get(videoId);
+                    if (data) applyLightboxAspect(data.w, data.h);
+                });
+            }
+            vlbIframe.src = [
+                `https://player.vimeo.com/video/${videoId}`,
+                '?autoplay=1&loop=1&rel=0',
+                '&color=fe6e00&byline=0&title=0&portrait=0',
+                '&transparent=0&pip=0&dnt=1'
+            ].join('');
         }
 
-        // loop=1    → loops instead of showing Vimeo end-screen recommendations
-        // rel=0     → suppress related videos shown at end (Vimeo Pro)
-        // transparent=0 → force black bg, hides Vimeo watermark area
-        // pip=0     → disable picture-in-picture button
-        // color=fe6e00 → brand accent on progress bar
-        vlbIframe.src = [
-            `https://player.vimeo.com/video/${videoId}`,
-            '?autoplay=1&loop=1&rel=0',
-            '&color=fe6e00&byline=0&title=0&portrait=0',
-            '&transparent=0&pip=0&dnt=1'
-        ].join('');
         lightbox.setAttribute('aria-hidden', 'false');
         lightbox.classList.add('vlb-open');
         document.body.style.overflow = 'hidden';
         if (window.lenis) window.lenis.stop(); // freeze Lenis virtual scroll
         requestAnimationFrame(() => vlbClose.focus());
     }
+
+    // Expose lightbox globally so the reel section script can use it
+    window.openVideoLightbox = openLightbox;
 
     function closeLightbox() {
         if (!lightbox.classList.contains('vlb-open')) return; // prevent double-close
@@ -3365,6 +3375,8 @@ function initWorkShowcase() {
             if (vlbIframe) vlbIframe.src = '';
             vlbCloseTimer = null;
         }, 450);
+        // Notify other components (e.g. reel) to resume playback
+        window.dispatchEvent(new CustomEvent('vlb:close'));
     }
 
     vlbClose.addEventListener('click', closeLightbox);
@@ -3374,11 +3386,11 @@ function initWorkShowcase() {
     });
 
     // Ambient cards — click anywhere on card opens lightbox
-    document.querySelectorAll('.ws-card--ambient[data-vimeo-id]').forEach(card => {
+    document.querySelectorAll('.ws-card--ambient[data-vid]').forEach(card => {
         card.addEventListener('click', (e) => {
             // don't open if user clicked wsc-watch-btn (it fires its own handler below)
             if (e.target.closest('.wsc-watch-btn')) return;
-            openLightbox(card.dataset.vimeoId);
+            openLightbox(card.dataset.vid);
         });
     });
 
@@ -3386,8 +3398,8 @@ function initWorkShowcase() {
     document.querySelectorAll('.wsc-watch-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.stopPropagation();
-            const card = btn.closest('[data-vimeo-id]');
-            if (card) openLightbox(card.dataset.vimeoId);
+            const card = btn.closest('[data-vid]');
+            if (card) openLightbox(card.dataset.vid);
         });
     });
 
@@ -3396,7 +3408,7 @@ function initWorkShowcase() {
         btn.addEventListener('click', (e) => {
             e.stopPropagation();
             e.preventDefault();
-            openLightbox(btn.dataset.vimeoId);
+            openLightbox(btn.dataset.vid);
         });
     });
 }
