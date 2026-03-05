@@ -1,16 +1,15 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tri Matic |Creative Video & Design Studio</title>
+    <title>Tri Matic</title>
     <meta name="description"
         content="Tri Matic is a creative digital studio crafting immersive, interaction-driven websites and digital experiences.">
 
     <!-- Favicon — TM rendered in Blanka Regular via Chrome headless, 96×96 PNG -->
     <link rel="icon" href="assets/favicon.png" type="image/png" sizes="96x96">
-    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="assets/favicon.png">
 
     <!-- Browser / OS theme colors -->
@@ -350,6 +349,124 @@
                     </p>
                 </div>
             </div>
+        </section>
+
+
+        <!-- ═══════════════════════════════════════
+             CINEMATIC REEL SECTION — Multi-Video Carousel
+        ═══════════════════════════════════════ -->
+        <section class="reel-section" id="reel" aria-label="Showreel">
+
+            <!-- ── VIDEO TRACK ──────────────────────── -->
+            <div class="reel-track" id="reelTrack">
+
+                <!-- SLIDE 1 — lazy (loaded when reel approaches viewport) -->
+                <div class="reel-slide reel-slide--active" data-title="Brand Film" data-cat="◆ Motion Design" data-vid="1170088271" data-platform="vimeo">
+                    <iframe class="reel-vimeo"
+                        data-src="https://player.vimeo.com/video/1170088271?background=1&autoplay=1&loop=1&muted=1&quality=360p&byline=0&title=0&portrait=0&dnt=1"
+                        frameborder="0" allow="autoplay; fullscreen; picture-in-picture"
+                        aria-hidden="true"></iframe>
+                </div>
+
+                <!-- SLIDE 2 — lazy, YouTube Long Form -->
+                <div class="reel-slide" data-title="Long Form" data-cat="◆ Long Form" data-vid="DIAxEMPm7aU" data-platform="youtube">
+                    <iframe class="reel-yt"
+                        data-src="https://www.youtube.com/embed/DIAxEMPm7aU?autoplay=1&mute=1&loop=1&playlist=DIAxEMPm7aU&controls=0&showinfo=0&modestbranding=1&rel=0&enablejsapi=1&playsinline=1"
+                        frameborder="0" allow="autoplay; fullscreen; picture-in-picture; accelerometer; encrypted-media; gyroscope"
+                        aria-hidden="true"></iframe>
+                </div>
+
+                <!-- SLIDE 3 — lazy -->
+                <div class="reel-slide" data-title="Cinematic Edits" data-cat="◆ Cinematic" data-vid="1169202605" data-platform="vimeo">
+                    <iframe class="reel-vimeo"
+                        data-src="https://player.vimeo.com/video/1169202605?background=1&autoplay=1&loop=1&muted=1&quality=360p&byline=0&title=0&portrait=0&dnt=1"
+                        frameborder="0" allow="autoplay; fullscreen; picture-in-picture"
+                        aria-hidden="true"></iframe>
+                </div>
+
+                <!-- SLIDE 4 — lazy, starts at t=23 -->
+                <div class="reel-slide" data-title="Product Showreel" data-cat="◆ All Categories" data-vimeo-start="23" data-vid="1170099080" data-platform="vimeo">
+                    <iframe class="reel-vimeo"
+                        data-src="https://player.vimeo.com/video/1170099080?background=1&autoplay=1&loop=1&muted=1&quality=360p&byline=0&title=0&portrait=0&dnt=1#t=23"
+                        frameborder="0" allow="autoplay; fullscreen; picture-in-picture"
+                        aria-hidden="true"></iframe>
+                </div>
+
+                <!-- ↑ Add more slides above this line ↑ -->
+
+            </div><!-- /reel-track -->
+
+            <!-- ── CINEMATIC OVERLAYS ─────────────────── -->
+            <div class="reel-overlay reel-overlay--top" aria-hidden="true"></div>
+            <div class="reel-overlay reel-overlay--bottom" aria-hidden="true"></div>
+            <div class="reel-overlay reel-overlay--vignette" aria-hidden="true"></div>
+            <div class="reel-scanlines" aria-hidden="true"></div>
+
+            <!-- ── SLIDE CONTENT (updated by JS) ─────── -->
+            <div class="reel-content" aria-live="polite">
+                <span class="reel-eyebrow" id="reelCat">◆ All Categories</span>
+                <h2 class="reel-title">
+                    <span id="reelTitleMain">Showreel</span>
+                    <span class="reel-title-line--outline" id="reelTitleSub">2025</span>
+                </h2>
+                <button type="button" id="reelCta"
+                    class="reel-cta magnetic-btn cursor-target">
+                    <span>Watch Full Video</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M7 7h10v10M7 17L17 7" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- ── NAVIGATION ARROWS ──────────────────── -->
+            <button class="reel-nav reel-nav--prev" id="reelPrev" aria-label="Previous video">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M15 18l-6-6 6-6" />
+                </svg>
+            </button>
+            <button class="reel-nav reel-nav--next" id="reelNext" aria-label="Next video">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+            </button>
+
+            <!-- ── BOTTOM BAR ──────────────────────────── -->
+            <div class="reel-bar">
+
+                <!-- Dot indicators (built by JS) -->
+                <div class="reel-dots" id="reelDots" role="group" aria-label="Slide indicators"></div>
+
+                <!-- Counter -->
+                <div class="reel-counter">
+                    <span id="reelIdx">01</span>
+                    <span class="reel-counter-sep"> / </span>
+                    <span id="reelTotal">04</span>
+                </div>
+
+                <!-- Mute toggle -->
+                <button class="reel-mute-btn" id="reelMuteBtn" aria-label="Unmute video" title="Toggle sound">
+                    <svg class="reel-icon reel-icon--muted" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.8">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                        <line x1="23" y1="9" x2="17" y2="15" />
+                        <line x1="17" y1="9" x2="23" y2="15" />
+                    </svg>
+                    <svg class="reel-icon reel-icon--unmuted" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.8">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+                    </svg>
+                </button>
+
+            </div><!-- /reel-bar -->
+
+            <!-- Corner watermark -->
+            <div class="reel-corner-label" aria-hidden="true">
+                <span>TRIMATIC STUDIO</span>
+                <span>SHOWREEL</span>
+            </div>
+
         </section>
 
 
@@ -721,6 +838,149 @@
 
 
         <!-- ═══════════════════════════════════════
+             3D CIRCULAR DESIGN GALLERY
+        ═══════════════════════════════════════ -->
+        <section class="design-gallery" id="design-gallery">
+            <div class="dg-bg" aria-hidden="true"></div>
+
+            <div class="dg-inner">
+
+                <div class="dg-header">
+                    <span class="section-label dg-label">05 &bull; Design Portfolio</span>
+                    <h2 class="dg-title">
+                        <span class="dg-tl"><span class="dg-tw">Visual</span></span>
+                        <span class="dg-tl dg-tl--alt"><span class="dg-tw">Designs</span></span>
+                    </h2>
+                    <p class="dg-desc">Logos &nbsp;&middot;&nbsp; Brand Kits &nbsp;&middot;&nbsp; Thumbnails &nbsp;&middot;&nbsp; Social Media &nbsp;&middot;&nbsp; Posters &nbsp;&middot;&nbsp; Ads</p>
+                    <p class="dg-hint">Drag to spin &nbsp;&middot;&nbsp; Click to preview</p>
+                </div>
+
+                <div class="dg-stage" id="dgStage">
+                    <div class="dg-ring" id="dgRing">
+
+                        <div class="dg-card" data-i="0" data-cat="Logo Design" data-img="assets/design-bo-logo.webp">
+                            <div class="dg-card-vis">
+                                <img class="dg-img" src="assets/design-bo-logo.webp" alt="BO Logo Design" loading="lazy" decoding="async">
+                                <span class="dg-card-caption">Logo Design</span>
+                            </div>
+                            <div class="dg-card-foot"><span class="dg-card-n">01</span><span class="dg-card-c">Logo Design</span></div>
+                        </div>
+
+                        <div class="dg-card" data-i="1" data-cat="Brand Identity" data-img="assets/design-brand-cap.webp">
+                            <div class="dg-card-vis">
+                                <img class="dg-img" src="assets/design-brand-cap.webp" alt="Branded Cap Design" loading="lazy" decoding="async">
+                                <span class="dg-card-caption">Brand Identity</span>
+                            </div>
+                            <div class="dg-card-foot"><span class="dg-card-n">02</span><span class="dg-card-c">Brand Identity</span></div>
+                        </div>
+
+                        <div class="dg-card" data-i="2" data-cat="Thumbnail Design" data-img="assets/design-thumb-ai.webp">
+                            <div class="dg-card-vis">
+                                <img class="dg-img" src="assets/design-thumb-ai.webp" alt="AI Thumbnail Design" loading="lazy" decoding="async">
+                                <span class="dg-card-caption">Thumbnails</span>
+                            </div>
+                            <div class="dg-card-foot"><span class="dg-card-n">03</span><span class="dg-card-c">Thumbnail Design</span></div>
+                        </div>
+
+                        <div class="dg-card" data-i="3" data-cat="Social Media" data-img="assets/design-social-6hours.webp">
+                            <div class="dg-card-vis">
+                                <img class="dg-img" src="assets/design-social-6hours.webp" alt="Social Media — 6 Hours" loading="lazy" decoding="async">
+                                <span class="dg-card-caption">Social Media</span>
+                            </div>
+                            <div class="dg-card-foot"><span class="dg-card-n">04</span><span class="dg-card-c">Social Media</span></div>
+                        </div>
+
+                        <div class="dg-card" data-i="4" data-cat="Cover Art" data-img="assets/design-cover-extra.webp">
+                            <div class="dg-card-vis">
+                                <img class="dg-img" src="assets/design-cover-extra.webp" alt="Cover Art" loading="lazy" decoding="async">
+                                <span class="dg-card-caption">Cover Art</span>
+                            </div>
+                            <div class="dg-card-foot"><span class="dg-card-n">05</span><span class="dg-card-c">Cover Art</span></div>
+                        </div>
+
+                        <div class="dg-card" data-i="5" data-cat="Graphic Design" data-img="assets/design-just-start.webp">
+                            <div class="dg-card-vis">
+                                <img class="dg-img" src="assets/design-just-start.webp" alt="Just Start — Motivational Graphic" loading="lazy" decoding="async">
+                                <span class="dg-card-caption">Graphic Design</span>
+                            </div>
+                            <div class="dg-card-foot"><span class="dg-card-n">06</span><span class="dg-card-c">Graphic Design</span></div>
+                        </div>
+
+                        <div class="dg-card" data-i="6" data-cat="Thumbnail Design" data-img="assets/design-thumb-zuckerberg.webp">
+                            <div class="dg-card-vis">
+                                <img class="dg-img" src="assets/design-thumb-zuckerberg.webp" alt="Zuckerberg Thumbnail" loading="lazy" decoding="async">
+                                <span class="dg-card-caption">Thumbnails</span>
+                            </div>
+                            <div class="dg-card-foot"><span class="dg-card-n">07</span><span class="dg-card-c">Thumbnail Design</span></div>
+                        </div>
+
+                        <div class="dg-card" data-i="7" data-cat="Brand Materials" data-img="assets/design-pediabuddy.webp">
+                            <div class="dg-card-vis">
+                                <img class="dg-img" src="assets/design-pediabuddy.webp" alt="PediaBuddy — Brand Material" loading="lazy" decoding="async">
+                                <span class="dg-card-caption">Brand Materials</span>
+                            </div>
+                            <div class="dg-card-foot"><span class="dg-card-n">08</span><span class="dg-card-c">Brand Materials</span></div>
+                        </div>
+
+                        <div class="dg-card" data-i="8" data-cat="Poster Design" data-img="assets/design-batman-poster.webp">
+                            <div class="dg-card-vis">
+                                <img class="dg-img" src="assets/design-batman-poster.webp" alt="Batman Poster Design" loading="lazy" decoding="async">
+                                <span class="dg-card-caption">Poster Design</span>
+                            </div>
+                            <div class="dg-card-foot"><span class="dg-card-n">09</span><span class="dg-card-c">Poster Design</span></div>
+                        </div>
+
+                        <div class="dg-card" data-i="9" data-cat="Ad Design" data-img="assets/design-lsc-ad.webp">
+                            <div class="dg-card-vis">
+                                <img class="dg-img" src="assets/design-lsc-ad.webp" alt="LSC Ad Campaign" loading="lazy" decoding="async">
+                                <span class="dg-card-caption">Ad Design</span>
+                            </div>
+                            <div class="dg-card-foot"><span class="dg-card-n">10</span><span class="dg-card-c">Ad Design</span></div>
+                        </div>
+
+                    </div><!-- /dg-ring -->
+                </div><!-- /dg-stage -->
+
+                <div class="dg-controls">
+                    <button class="dg-nav-btn dg-prev cursor-target" id="dgPrev" aria-label="Previous">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+                    </button>
+                    <div class="dg-counter">
+                        <span class="dg-idx" id="dgIdx">01</span><span class="dg-sep"> / </span><span class="dg-tot">10</span>
+                    </div>
+                    <button class="dg-nav-btn dg-next cursor-target" id="dgNext" aria-label="Next">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+                    </button>
+                </div>
+
+            </div><!-- /dg-inner -->
+
+            <!-- ── Infinite scrolling marquee — all design work ── -->
+            <div class="dg-marquee" aria-label="Design work showcase strip">
+                <div class="dg-marquee-track">
+                    <!-- Set 1 -->
+                    <div class="dg-mq-item" data-img="assets/design-graphico-logo.webp"><img src="assets/design-graphico-logo.webp" alt="Graphico Logo" loading="lazy" decoding="async"></div>
+                    <div class="dg-mq-item" data-img="assets/design-rk-logo.webp"><img src="assets/design-rk-logo.webp" alt="RK Logo" loading="lazy" decoding="async"></div>
+                    <div class="dg-mq-item" data-img="assets/design-thumb-brain.webp"><img src="assets/design-thumb-brain.webp" alt="Brain Thumbnail" loading="lazy" decoding="async"></div>
+                    <div class="dg-mq-item" data-img="assets/design-thumb-paypal.webp"><img src="assets/design-thumb-paypal.webp" alt="PayPal Thumbnail" loading="lazy" decoding="async"></div>
+                    <div class="dg-mq-item" data-img="assets/design-thumb-rs3m.webp"><img src="assets/design-thumb-rs3m.webp" alt="RS3M Thumbnail" loading="lazy" decoding="async"></div>
+                    <div class="dg-mq-item" data-img="assets/design-social-linkedin.webp"><img src="assets/design-social-linkedin.webp" alt="LinkedIn Social Design" loading="lazy" decoding="async"></div>
+                    <div class="dg-mq-item" data-img="assets/design-thumb-extra.webp"><img src="assets/design-thumb-extra.webp" alt="Extra Thumbnail" loading="lazy" decoding="async"></div>
+                    <!-- Set 2 — duplicate for seamless loop -->
+                    <div class="dg-mq-item" data-img="assets/design-graphico-logo.webp"><img src="assets/design-graphico-logo.webp" alt="Graphico Logo" loading="lazy" decoding="async"></div>
+                    <div class="dg-mq-item" data-img="assets/design-rk-logo.webp"><img src="assets/design-rk-logo.webp" alt="RK Logo" loading="lazy" decoding="async"></div>
+                    <div class="dg-mq-item" data-img="assets/design-thumb-brain.webp"><img src="assets/design-thumb-brain.webp" alt="Brain Thumbnail" loading="lazy" decoding="async"></div>
+                    <div class="dg-mq-item" data-img="assets/design-thumb-paypal.webp"><img src="assets/design-thumb-paypal.webp" alt="PayPal Thumbnail" loading="lazy" decoding="async"></div>
+                    <div class="dg-mq-item" data-img="assets/design-thumb-rs3m.webp"><img src="assets/design-thumb-rs3m.webp" alt="RS3M Thumbnail" loading="lazy" decoding="async"></div>
+                    <div class="dg-mq-item" data-img="assets/design-social-linkedin.webp"><img src="assets/design-social-linkedin.webp" alt="LinkedIn Social Design" loading="lazy" decoding="async"></div>
+                    <div class="dg-mq-item" data-img="assets/design-thumb-extra.webp"><img src="assets/design-thumb-extra.webp" alt="Extra Thumbnail" loading="lazy" decoding="async"></div>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ═══════════════════════════════════════
              3D GLOBE — GRAPHIC DESIGN EXPERTISE
         ═══════════════════════════════════════ -->
         <section class="globe-section" id="expertise">
@@ -766,141 +1026,6 @@
                 </div>
 
             </div>
-        </section>
-
-
-        <!-- ═══════════════════════════════════════
-             3D CIRCULAR DESIGN GALLERY
-        ═══════════════════════════════════════ -->
-        <section class="design-gallery" id="design-gallery">
-            <div class="dg-bg" aria-hidden="true"></div>
-
-            <div class="dg-inner">
-
-                <div class="dg-header">
-                    <span class="section-label dg-label">05 &bull; Design Portfolio</span>
-                    <h2 class="dg-title">
-                        <span class="dg-tl"><span class="dg-tw">Visual</span></span>
-                        <span class="dg-tl dg-tl--alt"><span class="dg-tw">Designs</span></span>
-                    </h2>
-                    <p class="dg-desc">Logos &nbsp;&middot;&nbsp; Brand Kits &nbsp;&middot;&nbsp; Social Graphics &nbsp;&middot;&nbsp; Thumbnails &nbsp;&middot;&nbsp; Covers</p>
-                    <p class="dg-hint">Drag to spin &nbsp;&middot;&nbsp; Click to preview</p>
-                </div>
-
-                <div class="dg-stage" id="dgStage">
-                    <div class="dg-ring" id="dgRing">
-
-                        <div class="dg-card" data-i="0" data-cat="Logo Design">
-                            <div class="dg-card-vis">
-                                <div class="da1"></div><div class="da2"></div>
-                                <span class="dg-card-caption">Logo Design</span>
-                            </div>
-                            <div class="dg-card-foot"><span class="dg-card-n">01</span><span class="dg-card-c">Logo Design</span></div>
-                        </div>
-
-                        <div class="dg-card" data-i="1" data-cat="Brand Identity">
-                            <div class="dg-card-vis">
-                                <div class="da1"></div><div class="da2"></div>
-                                <span class="dg-card-caption">Brand Identity</span>
-                            </div>
-                            <div class="dg-card-foot"><span class="dg-card-n">02</span><span class="dg-card-c">Brand Identity</span></div>
-                        </div>
-
-                        <div class="dg-card" data-i="2" data-cat="Thumbnail Design">
-                            <div class="dg-card-vis">
-                                <div class="da1"></div><div class="da2"></div>
-                                <span class="dg-card-caption">Thumbnails</span>
-                            </div>
-                            <div class="dg-card-foot"><span class="dg-card-n">03</span><span class="dg-card-c">Thumbnail Design</span></div>
-                        </div>
-
-                        <div class="dg-card" data-i="3" data-cat="Social Media">
-                            <div class="dg-card-vis">
-                                <div class="da1"></div><div class="da2"></div>
-                                <span class="dg-card-caption">Social Media</span>
-                            </div>
-                            <div class="dg-card-foot"><span class="dg-card-n">04</span><span class="dg-card-c">Social Media</span></div>
-                        </div>
-
-                        <div class="dg-card" data-i="4" data-cat="Cover Pages">
-                            <div class="dg-card-vis">
-                                <div class="da1"></div><div class="da2"></div>
-                                <span class="dg-card-caption">Cover Pages</span>
-                            </div>
-                            <div class="dg-card-foot"><span class="dg-card-n">05</span><span class="dg-card-c">Cover Pages</span></div>
-                        </div>
-
-                        <div class="dg-card" data-i="5" data-cat="Motion Intros">
-                            <div class="dg-card-vis">
-                                <div class="da1"></div><div class="da2"></div>
-                                <span class="dg-card-caption">Motion Intros</span>
-                            </div>
-                            <div class="dg-card-foot"><span class="dg-card-n">06</span><span class="dg-card-c">Motion Intros</span></div>
-                        </div>
-
-                        <div class="dg-card" data-i="6" data-cat="Color Grading">
-                            <div class="dg-card-vis">
-                                <div class="da1"></div><div class="da2"></div>
-                                <span class="dg-card-caption">Color Grading</span>
-                            </div>
-                            <div class="dg-card-foot"><span class="dg-card-n">07</span><span class="dg-card-c">Color Grading</span></div>
-                        </div>
-
-                        <div class="dg-card" data-i="7" data-cat="LUT Packs">
-                            <div class="dg-card-vis">
-                                <div class="da1"></div><div class="da2"></div>
-                                <span class="dg-card-caption">LUT Packs</span>
-                            </div>
-                            <div class="dg-card-foot"><span class="dg-card-n">08</span><span class="dg-card-c">LUT Packs</span></div>
-                        </div>
-
-                        <div class="dg-card" data-i="8" data-cat="Brand Materials">
-                            <div class="dg-card-vis">
-                                <div class="da1"></div><div class="da2"></div>
-                                <span class="dg-card-caption">Brand Materials</span>
-                            </div>
-                            <div class="dg-card-foot"><span class="dg-card-n">09</span><span class="dg-card-c">Brand Materials</span></div>
-                        </div>
-
-                        <div class="dg-card" data-i="9" data-cat="Poster Design">
-                            <div class="dg-card-vis">
-                                <div class="da1"></div><div class="da2"></div>
-                                <span class="dg-card-caption">Poster Design</span>
-                            </div>
-                            <div class="dg-card-foot"><span class="dg-card-n">10</span><span class="dg-card-c">Poster Design</span></div>
-                        </div>
-
-                    </div><!-- /dg-ring -->
-                </div><!-- /dg-stage -->
-
-                <div class="dg-controls">
-                    <button class="dg-nav-btn dg-prev cursor-target" id="dgPrev" aria-label="Previous">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
-                    </button>
-                    <div class="dg-counter">
-                        <span class="dg-idx" id="dgIdx">01</span><span class="dg-sep"> / </span><span class="dg-tot">10</span>
-                    </div>
-                    <button class="dg-nav-btn dg-next cursor-target" id="dgNext" aria-label="Next">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
-                    </button>
-                </div>
-
-            </div><!-- /dg-inner -->
-
-            <!-- Lightbox -->
-            <div class="dg-lightbox" id="dgLightbox" hidden>
-                <div class="dg-lb-backdrop" id="dgLbBackdrop"></div>
-                <div class="dg-lb-card">
-                    <button class="dg-lb-close" id="dgLbClose" aria-label="Close">&times;</button>
-                    <div class="dg-lb-visual" id="dgLbVisual"></div>
-                    <div class="dg-lb-info">
-                        <span class="dg-lb-num" id="dgLbNum"></span>
-                        <h3 class="dg-lb-title" id="dgLbTitle"></h3>
-                        <p class="dg-lb-note">Replace placeholder with your actual design work</p>
-                    </div>
-                </div>
-            </div>
-
         </section>
 
 
@@ -1091,124 +1216,6 @@
                 </div><!-- /ws-grid -->
 
             </div><!-- /ws-inner -->
-        </section>
-
-
-        <!-- ═══════════════════════════════════════
-             CINEMATIC REEL SECTION — Multi-Video Carousel
-        ═══════════════════════════════════════ -->
-        <section class="reel-section" id="reel" aria-label="Showreel">
-
-            <!-- ── VIDEO TRACK ──────────────────────── -->
-            <div class="reel-track" id="reelTrack">
-
-                <!-- SLIDE 1 — loads immediately, starts at t=23 -->
-                <div class="reel-slide reel-slide--active" data-title="Showreel 2025" data-cat="◆ All Categories" data-vimeo-start="23" data-vid="1170099080" data-platform="vimeo">
-                    <iframe class="reel-vimeo"
-                        src="https://player.vimeo.com/video/1170099080?background=1&autoplay=1&loop=1&muted=1&quality=540p&byline=0&title=0&portrait=0&dnt=1#t=23"
-                        frameborder="0" allow="autoplay; fullscreen; picture-in-picture"
-                        aria-hidden="true"></iframe>
-                </div>
-
-                <!-- SLIDE 2 — lazy -->
-                <div class="reel-slide" data-title="Cinematic Edits" data-cat="◆ Cinematic" data-vid="1169202605" data-platform="vimeo">
-                    <iframe class="reel-vimeo"
-                        data-src="https://player.vimeo.com/video/1169202605?background=1&autoplay=1&loop=1&muted=1&quality=540p&byline=0&title=0&portrait=0&dnt=1"
-                        frameborder="0" allow="autoplay; fullscreen; picture-in-picture"
-                        aria-hidden="true"></iframe>
-                </div>
-
-                <!-- SLIDE 3 — lazy, YouTube Long Form -->
-                <div class="reel-slide" data-title="Long Form" data-cat="◆ Long Form" data-vid="DIAxEMPm7aU" data-platform="youtube">
-                    <iframe class="reel-yt"
-                        data-src="https://www.youtube.com/embed/DIAxEMPm7aU?autoplay=1&mute=1&loop=1&playlist=DIAxEMPm7aU&controls=0&showinfo=0&modestbranding=1&rel=0&enablejsapi=1&playsinline=1"
-                        frameborder="0" allow="autoplay; fullscreen; picture-in-picture; accelerometer; encrypted-media; gyroscope"
-                        aria-hidden="true"></iframe>
-                </div>
-
-                <!-- SLIDE 4 — lazy -->
-                <div class="reel-slide" data-title="Brand Films" data-cat="◆ Motion Design" data-vid="1170088271" data-platform="vimeo">
-                    <iframe class="reel-vimeo"
-                        data-src="https://player.vimeo.com/video/1170088271?background=1&autoplay=1&loop=1&muted=1&quality=540p&byline=0&title=0&portrait=0&dnt=1"
-                        frameborder="0" allow="autoplay; fullscreen; picture-in-picture"
-                        aria-hidden="true"></iframe>
-                </div>
-
-                <!-- ↑ Add more slides above this line ↑ -->
-
-            </div><!-- /reel-track -->
-
-            <!-- ── CINEMATIC OVERLAYS ─────────────────── -->
-            <div class="reel-overlay reel-overlay--top" aria-hidden="true"></div>
-            <div class="reel-overlay reel-overlay--bottom" aria-hidden="true"></div>
-            <div class="reel-overlay reel-overlay--vignette" aria-hidden="true"></div>
-            <div class="reel-scanlines" aria-hidden="true"></div>
-
-            <!-- ── SLIDE CONTENT (updated by JS) ─────── -->
-            <div class="reel-content" aria-live="polite">
-                <span class="reel-eyebrow" id="reelCat">◆ All Categories</span>
-                <h2 class="reel-title">
-                    <span id="reelTitleMain">Showreel</span>
-                    <span class="reel-title-line--outline" id="reelTitleSub">2025</span>
-                </h2>
-                <button type="button" id="reelCta"
-                    class="reel-cta magnetic-btn cursor-target">
-                    <span>Watch Full Video</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                        <path d="M7 7h10v10M7 17L17 7" />
-                    </svg>
-                </button>
-            </div>
-
-            <!-- ── NAVIGATION ARROWS ──────────────────── -->
-            <button class="reel-nav reel-nav--prev" id="reelPrev" aria-label="Previous video">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                    <path d="M15 18l-6-6 6-6" />
-                </svg>
-            </button>
-            <button class="reel-nav reel-nav--next" id="reelNext" aria-label="Next video">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                    <path d="M9 18l6-6-6-6" />
-                </svg>
-            </button>
-
-            <!-- ── BOTTOM BAR ──────────────────────────── -->
-            <div class="reel-bar">
-
-                <!-- Dot indicators (built by JS) -->
-                <div class="reel-dots" id="reelDots" role="group" aria-label="Slide indicators"></div>
-
-                <!-- Counter -->
-                <div class="reel-counter">
-                    <span id="reelIdx">01</span>
-                    <span class="reel-counter-sep"> / </span>
-                    <span id="reelTotal">04</span>
-                </div>
-
-                <!-- Mute toggle -->
-                <button class="reel-mute-btn" id="reelMuteBtn" aria-label="Unmute video" title="Toggle sound">
-                    <svg class="reel-icon reel-icon--muted" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="1.8">
-                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-                        <line x1="23" y1="9" x2="17" y2="15" />
-                        <line x1="17" y1="9" x2="23" y2="15" />
-                    </svg>
-                    <svg class="reel-icon reel-icon--unmuted" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="1.8">
-                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-                    </svg>
-                </button>
-
-            </div><!-- /reel-bar -->
-
-            <!-- Corner watermark -->
-            <div class="reel-corner-label" aria-hidden="true">
-                <span>TRIMATIC STUDIO</span>
-                <span>SHOWREEL</span>
-            </div>
-
         </section>
 
 
@@ -1534,7 +1541,11 @@
             var current   = 0;
             var isMuted   = true;
             var sectionInView = false;
-            var hasVimeoSDK   = typeof Vimeo !== 'undefined' && typeof Vimeo.Player === 'function';
+
+            /* Check SDK availability dynamically (defer may load after DOMContentLoaded) */
+            function hasVimeoSDK() {
+                return typeof Vimeo !== 'undefined' && typeof Vimeo.Player === 'function';
+            }
 
             /* ── YouTube postMessage helpers ─────────────────────── */
             function ytCommand(iframe, func, args) {
@@ -1557,7 +1568,7 @@
                 }
 
                 // Create Vimeo.Player SDK wrapper (only for Vimeo slides)
-                if (platforms[i] === 'vimeo' && hasVimeoSDK && !players[i] && iframe.getAttribute('src')) {
+                if (platforms[i] === 'vimeo' && hasVimeoSDK() && !players[i] && iframe.getAttribute('src')) {
                     players[i] = new Vimeo.Player(iframe);
 
                     // Apply start-time offset if the slide specifies one
@@ -1683,6 +1694,20 @@
                 muteBtn.setAttribute('aria-label', isMuted ? 'Unmute video' : 'Mute video');
             });
 
+            /* ── Early preload: start loading current + next slide before section is visible ── */
+            var preloaded = false;
+            if (section) {
+                var preloadObserver = new IntersectionObserver(function (entries) {
+                    if (entries[0].isIntersecting && !preloaded) {
+                        preloaded = true;
+                        ensurePlayer(0);
+                        ensurePlayer(1);
+                        preloadObserver.disconnect();
+                    }
+                }, { rootMargin: '600px 0px' }); // start loading 600px before section enters
+                preloadObserver.observe(section);
+            }
+
             /* ── Auto-play / pause on scroll visibility ──────────── */
             if (section) {
                 var visObserver = new IntersectionObserver(function (entries) {
@@ -1718,9 +1743,14 @@
                 }
             });
 
-            /* ── Boot ────────────────────────────────────────────── */
-            ensurePlayer(0);
-            goTo(0);
+            /* ── Boot — set initial UI text (iframes preload via observer above) ── */
+            var data0 = slides[0].dataset;
+            if (catEl) catEl.textContent = data0.cat || '';
+            if (titleMain && titleSub) {
+                var p0 = (data0.title || '').split(' ');
+                titleMain.textContent = p0.slice(0, -1).join(' ') || p0[0];
+                titleSub.textContent  = p0.length > 1 ? p0[p0.length - 1] : '';
+            }
         });
     </script>
 
@@ -1791,6 +1821,29 @@
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
         </button>
     </div>
+
+    <!-- Design Gallery Lightbox (outside sections to avoid transform containment) -->
+            <!-- Lightbox — full-image preview with navigation -->
+            <div class="dg-lightbox" id="dgLightbox" hidden>
+                <div class="dg-lb-backdrop" id="dgLbBackdrop"></div>
+                <div class="dg-lb-card">
+                    <button class="dg-lb-close" id="dgLbClose" aria-label="Close">&times;</button>
+                    <div class="dg-lb-visual" id="dgLbVisual"></div>
+                    <div class="dg-lb-info">
+                        <span class="dg-lb-num" id="dgLbNum"></span>
+                        <h3 class="dg-lb-title" id="dgLbTitle"></h3>
+                    </div>
+                    <div class="dg-lb-nav">
+                        <button class="dg-lb-arrow dg-lb-prev" id="dgLbPrev" aria-label="Previous image">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+                        </button>
+                        <button class="dg-lb-arrow dg-lb-next" id="dgLbNext" aria-label="Next image">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
 </body>
 
 </html>

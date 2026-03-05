@@ -5124,6 +5124,7 @@ body.hovered .custom-cursor {
     transition: border-color 0.3s;
     box-sizing: border-box;
     -webkit-appearance: none;
+    appearance: none;
 }
 
 .cs-field__input::placeholder {
@@ -5719,71 +5720,8 @@ body.hovered .custom-cursor {
 
 /* Per-card gradient + art */
 /* backgrounds */
-.dg-card[data-i="0"] .dg-card-vis { background: linear-gradient(140deg, #120400 0%, #220b00 100%); }
-.dg-card[data-i="1"] .dg-card-vis { background: linear-gradient(140deg, #050010 0%, #0e0030 100%); }
-.dg-card[data-i="2"] .dg-card-vis { background: linear-gradient(140deg, #0d0000 0%, #200012 100%); }
-.dg-card[data-i="3"] .dg-card-vis { background: linear-gradient(140deg, #080010 0%, #180028 100%); }
-.dg-card[data-i="4"] .dg-card-vis { background: linear-gradient(140deg, #000e03 0%, #001c0a 100%); }
-.dg-card[data-i="5"] .dg-card-vis { background: linear-gradient(140deg, #0c0c00 0%, #1c1500 100%); }
-.dg-card[data-i="6"] .dg-card-vis { background: linear-gradient(140deg, #000a14 0%, #001524 100%); }
-.dg-card[data-i="7"] .dg-card-vis { background: linear-gradient(140deg, #0e0900 0%, #1c1200 100%); }
-.dg-card[data-i="8"] .dg-card-vis { background: linear-gradient(140deg, #000610 0%, #001220 100%); }
-.dg-card[data-i="9"] .dg-card-vis { background: linear-gradient(140deg, #110000 0%, #1c000a 100%); }
-
-/* CSS art helpers */
-.dg-card-vis .da1,
-.dg-card-vis .da2 {
-    position: absolute;
-    pointer-events: none;
-    border-radius: 2px;
-}
-
-/* 0 - Logo Design: concentric rings */
-.dg-card[data-i="0"] .da1 { width: 68px; height: 68px; border: 2.5px solid rgba(254,110,0,0.7); border-radius: 50%; top: 30%; left: 50%; transform: translate(-50%,-50%); }
-.dg-card[data-i="0"] .da2 { width: 36px; height: 36px; background: rgba(254,110,0,0.1); border: 1.5px solid rgba(255,180,0,0.5); border-radius: 50%; top: 30%; left: 50%; transform: translate(-50%,-50%); }
-.dg-card[data-i="0"] .dg-card-vis::after { content: ''; position: absolute; width: 7px; height: 7px; background: #fe6e00; border-radius: 50%; top: 30%; left: 50%; transform: translate(-50%,-50%); }
-
-/* 1 - Brand Identity: color bar + type lines */
-.dg-card[data-i="1"] .da1 { left: 18px; top: 18px; right: 18px; height: 7px; background: linear-gradient(90deg, #fe6e00, #ffcc44, #00f0ff, rgba(255,255,255,0.2)); border-radius: 4px; }
-.dg-card[data-i="1"] .da2 { left: 18px; top: 36px; right: 18px; height: 1px; background: rgba(255,255,255,0.09); }
-.dg-card[data-i="1"] .dg-card-vis::before { content: ''; position: absolute; left: 18px; top: 44px; width: 55px; height: 1px; background: rgba(255,255,255,0.06); }
-.dg-card[data-i="1"] .dg-card-vis::after  { content: ''; position: absolute; left: 18px; top: 54px; width: 35px; height: 1px; background: rgba(255,255,255,0.04); }
-
-/* 2 - Thumbnail: frame + bar */
-.dg-card[data-i="2"] .da1 { inset: 10px; border: 1.5px solid rgba(254,110,0,0.35); border-radius: 6px; }
-.dg-card[data-i="2"] .da2 { left: 10px; bottom: 48px; right: 10px; height: 2.5px; background: rgba(254,110,0,0.55); border-radius: 2px; }
-
-/* 3 - Social Media: square post */
-.dg-card[data-i="3"] .da1 { width: 88px; height: 88px; left: 50%; top: 30%; transform: translate(-50%,-50%); border: 1.5px solid rgba(255,255,255,0.1); border-radius: 8px; background: rgba(255,255,255,0.025); }
-.dg-card[data-i="3"] .da2 { width: 68px; height: 2px; left: 50%; top: 82%; transform: translateX(-50%); background: rgba(255,255,255,0.07); }
-
-/* 4 - Cover Pages: horizontal rule lines */
-.dg-card[data-i="4"] .da1 { left: 18px; right: 18px; top: 14px; height: 2.5px; background: rgba(254,110,0,0.5); }
-.dg-card[data-i="4"] .da2 { left: 18px; right: 18px; top: 22px; height: 1px; background: rgba(255,255,255,0.08); }
-.dg-card[data-i="4"] .dg-card-vis::before { content: ''; position: absolute; left: 18px; right: 18px; top: 29px; height: 1px; background: rgba(255,255,255,0.05); }
-.dg-card[data-i="4"] .dg-card-vis::after  { content: ''; position: absolute; left: 18px; right: 55px; bottom: 38px; height: 1px; background: rgba(254,110,0,0.3); }
-
-/* 5 - Motion Intros: play ring */
-.dg-card[data-i="5"] .da1 { width: 60px; height: 60px; border: 2px solid rgba(255,200,0,0.45); border-radius: 50%; top: 30%; left: 50%; transform: translate(-50%,-50%); }
-.dg-card[data-i="5"] .da2 { left: 50%; top: 30%; width: 0; height: 0; border-top: 12px solid transparent; border-bottom: 12px solid transparent; border-left: 20px solid rgba(255,200,0,0.7); transform: translate(-40%,-50%); }
-
-/* 6 - Color Grading: warm/cold split */
-.dg-card[data-i="6"] .da1 { left: 0; top: 0; width: 50%; bottom: 0; background: linear-gradient(to bottom, rgba(0,140,255,0.14), rgba(0,70,180,0.08)); }
-.dg-card[data-i="6"] .da2 { right: 0; top: 0; width: 50%; bottom: 0; background: linear-gradient(to bottom, rgba(254,110,0,0.14), rgba(180,50,0,0.08)); }
-.dg-card[data-i="6"] .dg-card-vis::after { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1.5px; background: rgba(255,255,255,0.14); transform: translateX(-50%); }
-
-/* 7 - LUT Packs: film strips */
-.dg-card[data-i="7"] .da1 { left: 14px; right: 14px; top: 22px; height: 72px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; }
-.dg-card[data-i="7"] .da2 { left: 14px; right: 14px; top: 105px; height: 32px; background: linear-gradient(90deg, rgba(254,110,0,0.22) 33%, rgba(0,150,255,0.22) 33% 66%, rgba(0,220,100,0.22) 66%); border: 1px solid rgba(255,255,255,0.06); border-radius: 4px; }
-
-/* 8 - Brand Materials: stacked card layers */
-.dg-card[data-i="8"] .da1 { left: 18px; top: 50px; right: 28px; height: 52px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; transform: rotate(-6deg); }
-.dg-card[data-i="8"] .da2 { left: 18px; top: 46px; right: 22px; height: 52px; background: rgba(254,110,0,0.06); border: 1px solid rgba(254,110,0,0.28); border-radius: 6px; }
-
-/* 9 - Poster Design: typographic lines */
-.dg-card[data-i="9"] .da1 { left: 14px; top: 16px; right: 14px; height: 3.5px; background: rgba(255,255,255,0.6); border-radius: 2px; }
-.dg-card[data-i="9"] .da2 { left: 14px; top: 25px; right: 14px; height: 1.5px; background: rgba(254,110,0,0.55); border-radius: 1px; }
-.dg-card[data-i="9"] .dg-card-vis::before { content: ''; position: absolute; left: 14px; top: 31px; right: 50px; height: 1px; background: rgba(255,255,255,0.08); }
+/* All cards share a dark fallback while image loads */
+.dg-card .dg-card-vis { background: #0a0a0a; }
 
 /* Caption */
 .dg-card-caption {
@@ -5795,13 +5733,13 @@ body.hovered .custom-cursor {
     font-size: 0.52rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.55);
+    color: rgba(255,255,255,0.85);
     text-align: center;
     z-index: 2;
     text-shadow: 0 1px 6px rgba(0,0,0,0.9);
 }
 
-/* Real image fill for design gallery cards */
+/* Image fill for design gallery cards */
 .dg-img {
     position: absolute;
     inset: 0;
@@ -5811,12 +5749,14 @@ body.hovered .custom-cursor {
     z-index: 0;
     display: block;
     border-radius: inherit;
+    transition: transform 0.5s ease;
 }
-/* Hide CSS-art placeholder divs when real image is present */
-.dg-img ~ .da1,
-.dg-img ~ .da2 { display: none; }
+
+/* Subtle zoom on active card image */
+.dg-card--active .dg-img { transform: scale(1.05); }
+
 /* Dark gradient at the bottom so caption stays readable */
-.dg-card-vis:has(.dg-img)::before {
+.dg-card-vis::before {
     content: '';
     position: absolute;
     bottom: 0; left: 0; right: 0;
@@ -5824,12 +5764,7 @@ body.hovered .custom-cursor {
     background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, transparent 100%);
     z-index: 1;
     pointer-events: none;
-    border-radius: 0;
-    transform: none;
-    width: auto;
 }
-/* Suppress per-card ::after CSS art when real image is present */
-.dg-card-vis:has(.dg-img)::after { display: none; }
 
 /* Label below card */
 .dg-card-foot {
@@ -5918,7 +5853,7 @@ body.hovered .custom-cursor {
 .dg-lb-backdrop {
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.9);
+    background: rgba(0,0,0,0.92);
     backdrop-filter: blur(14px);
 }
 
@@ -5929,7 +5864,7 @@ body.hovered .custom-cursor {
     border: 1px solid rgba(254,110,0,0.22);
     border-radius: 18px;
     overflow: hidden;
-    max-width: 400px;
+    max-width: 720px;
     width: 100%;
 }
 
@@ -5959,14 +5894,23 @@ body.hovered .custom-cursor {
     border-color: var(--color-accent);
 }
 
-.dg-lb-visual .dg-card-vis {
+.dg-lb-visual {
+    position: relative;
     width: 100%;
-    height: 260px;
-    border-radius: 0;
-    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #080808;
 }
 
-.dg-lb-info { padding: 1.4rem; }
+.dg-lb-visual img {
+    width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+    display: block;
+}
+
+.dg-lb-info { padding: 1.2rem 1.4rem; }
 
 .dg-lb-num {
     font-family: var(--font-mono);
@@ -5984,21 +5928,95 @@ body.hovered .custom-cursor {
     text-transform: uppercase;
     letter-spacing: 0.02em;
     color: var(--color-white);
-    margin: 0 0 0.5rem;
+    margin: 0;
 }
 
-.dg-lb-note {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.1em;
-    color: rgba(255,255,255,0.22);
-    font-style: italic;
+/* Lightbox navigation arrows */
+.dg-lb-nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1.4rem 1.2rem;
+}
+
+.dg-lb-arrow {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+    color: rgba(255,255,255,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color 0.25s, color 0.25s, background 0.25s;
+}
+
+.dg-lb-arrow:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    background: rgba(254,110,0,0.08);
+}
+
+/* ── Marquee strip ─────────────────────────────────────────── */
+.dg-marquee {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 2.5rem 0 0;
+    mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+}
+
+.dg-marquee-track {
+    display: flex;
+    gap: 1rem;
+    width: max-content;
+    animation: dg-scroll 35s linear infinite;
+}
+
+.dg-mq-item {
+    flex-shrink: 0;
+    width: 180px;
+    height: 120px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.06);
+    cursor: pointer;
+    transition: border-color 0.3s, transform 0.3s;
+}
+
+.dg-mq-item:hover {
+    border-color: rgba(254,110,0,0.4);
+    transform: translateY(-4px);
+}
+
+.dg-mq-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+@keyframes dg-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+/* Pause marquee on hover for readability */
+.dg-marquee:hover .dg-marquee-track {
+    animation-play-state: paused;
 }
 
 @media (max-width: 768px) {
     .dg-stage { height: 270px; }
     .dg-card { width: 130px; left: -65px; top: -90px; }
     .dg-card-vis { width: 130px; height: 175px; }
+    .dg-mq-item { width: 140px; height: 95px; }
+    .dg-marquee-track { animation-duration: 25s; }
+    .dg-lb-card { max-width: 92vw; }
+    .dg-lb-nav { padding: 0 1rem 1rem; }
+    .dg-lb-backdrop { backdrop-filter: none; }
 }
 
 
@@ -6655,6 +6673,7 @@ body.hovered .custom-cursor {
     transform: none;
     /* Subtle gradient fade on the divider line — warm at top, cold at bottom */
     -webkit-border-image: none;
+    border-image: none;
 }
 
 .cs-form-top {
@@ -6930,4 +6949,3 @@ body.hovered .custom-cursor {
     content-visibility: auto;
     contain-intrinsic-size: auto 800px;
 }
-
